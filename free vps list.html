@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free VPS List</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        :root {
+            --primary-blue: #007bff;
+            --primary-green: #28a745;
+            --primary-red: #dc3545;
+            --dark-bg: #0a0e1a;
+            --darker-bg: #070b14;
+            --card-bg: #1a1f2e;
+            --border-color: #2d3748;
+            --text-primary: #ffffff;
+            --text-secondary: #a0aec0;
+            --accent-blue: #4299e1;
+            --success-green: #48bb78;
+            --danger-red: #f56565;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(66, 153, 225, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(72, 187, 120, 0.1) 0%, transparent 50%);
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        header h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent-blue), var(--success-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(66, 153, 225, 0.3);
+        }
+
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2rem;
+        }
+
+        .cards {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cards::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--success-green), var(--primary-blue));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .cards:hover::before {
+            transform: scaleX(1);
+        }
+
+        .cards:hover {
+            transform: translateY(-8px);
+            border-color: rgba(66, 153, 225, 0.3);
+            box-shadow: 0 32px 64px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            background: var(--darker-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 120px;
+            height: 60px;
+            object-fit: contain;
+            filter: brightness(0.9);
+            transition: all 0.3s ease;
+        }
+
+        .cards:hover .card-image img {
+            transform: scale(1.1);
+            filter: brightness(1.1);
+        }
+
+        .card-content {
+            padding: 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .all-info {
+            flex: 1;
+            margin-bottom: 2rem;
+        }
+
+        .info {
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info:first-child {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .info:last-child {
+            color: var(--accent-blue);
+            font-weight: 500;
+        }
+
+        .yes {
+            background: var(--success-green);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .no {
+            background: var(--danger-red);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .visit {
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent-blue), var(--primary-blue));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .visit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .visit:hover::before {
+            left: 100%;
+        }
+
+        .visit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 32px rgba(66, 153, 225, 0.4);
+        }
+
+        .visit:active {
+            transform: translateY(0);
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--darker-bg);
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            main {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 2rem 1rem;
+            }
+
+            .cards {
+                min-height: auto;
+            }
+
+            header {
+                padding: 3rem 1rem 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card-content {
+                padding: 1.5rem;
+            }
+            
+            .info {
+                font-size: 0.85rem;
+            }
+            
+            .yes, .no {
+                font-size: 0.7rem;
+                padding: 0.2rem 0.6rem;
+            }
+        }
+
+        /* Animation for cards */
+        .cards {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .cards:nth-child(1) { animation-delay: 0.1s; }
+        .cards:nth-child(2) { animation-delay: 0.2s; }
+        .cards:nth-child(3) { animation-delay: 0.3s; }
+        .cards:nth-child(4) { animation-delay: 0.4s; }
+        .cards:nth-child(5) { animation-delay: 0.5s; }
+        .cards:nth-child(6) { animation-delay: 0.6s; }
+        .cards:nth-child(7) { animation-delay: 0.7s; }
+        .cards:nth-child(8) { animation-delay: 0.8s; }
+        .cards:nth-child(9) { animation-delay: 0.9s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Free VPS List</h1>
+    </header>
+
+    <main>
+        <section class="cards">
+            <div class="card-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 80'%3E%3Crect width='200' height='80' fill='%234285f4'/%3E%3Ctext x='100' y='45' text-anchor='middle' fill='white' font-family='Arial' font-size='20' font-weight='bold'%3EGoogle Shell%3C/text%3E%3C/svg%3E" alt="Google Shell">
+            </div>
+            <div class="card-content">
+                <h3 class="name">Google Shell</h3>
+                <div class="all-info">
+                    <h5 class="info">Ram : 8GB | CPU : 2 Core | Disk : 20GB</h5>
+                    <h5 class="info"><span class="no">Renew</span> | <span class="yes">Sudo</span> | <span class="no">24/7</span></h5>
+                    <h5 class="info">USA</h5>
+                </div>
+                <button class="visit" onclick="window.location.href='https://shell.cloud.google.com/'">Visit</button>
+            </div>
+        </section>
+        
+        <section class="cards">
+            <div class="card-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 80'%3E%3Crect width='200' height='80' fill='%234285f4'/%3E%3Ctext x='100' y='45' text-anchor='middle' fill='white' font-family='Arial' font-size='20' font-weight='bold'%3EIdx Google%3C/text%3E%3C/svg%3E" alt="Idx Google">
+            </div>
+            <div class="card-content">
+                <h3 class="name">Idx Google</h3>
+                <div class="all-info">
+                    <h5 class="info">Ram : 16GB | CPU : 4 Core | Disk : 30GB</h5>
+                    <h5 class="info"><span class="no">Renew</span> | <span class="yes">Sudo</span> | <span class="no">24/7</span></h5>
+                    <h5 class="info">USA</h5>
+                </div>
+                <button class="visit" onclick="window.location.href='https://idx.google.com/'">Visit</button>
+            </div>
+        </section>
+        
+        <section class="cards">
+            <div class="card-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 80'%3E%3Crect width='200' height='80' fill='%23ff6b35'/%3E%3Ctext x='100' y='45' text-anchor='middle' fill='white' font-family='Arial' font-size='18' font-weight='bold'%3EXshellz%3C/text%3E%3C/svg%3E" alt="Xshellz">
+            </div>
+            <div class="card-content">
+                <h3 class="name">Xshellz</h3>
+                <div class="all-info">
+                    <h5 class="info">Ram : 3GB | CPU : 8 Core | Disk : 10GB</h5>
+                    <h5 class="info"><span class="yes">Renew</span> | <span class="no">Sudo</span> | <span class="yes">24/7</span></h5>
+                    <h5 class="info">USA, United Kingdom</h5>
+                </div>
+                <button class="visit" onclick="window.location.href='https://www.xshellz.com/'">Visit</button>
+            </div>
+        </section>
+
+        <section class="cards">
+            <div class="card-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 80'%3E%3Crect width='200' height='80' fill='%23792ee5'/%3E%3Cpath d='M50 25 L70 40 L50 55 L55 50 L65 40 L55 30 Z' fill='%23ffd700'/%3E%3Ctext x='100' y='45' text-anchor='middle' fill='white' font-family='Arial' font-size='16' font-weight='bold'%3ELightning AI%3C/text%3E%3C/svg%3E" alt="Lightning AI">
+            </div>
+            <div class="card-content">
+                <h3 class="name">Lightning AI</h3>
+                <div class="all-info">
+                    <h5 class="info">Ram : 16GB | CPU : 4 Core | Disk : 100GB</h5>
+                    <h5 class="info"><span class="no">Renew</span> | <span class="yes">Sudo</span> | <span class="no">24/7</span></h5>
+                    <h5 class="info">USA</h5>
+                </div>
+                <button class="visit" onclick="window.location.href='https://lightning.ai/'">Visit</button>
+            </div>
+        </section>
+        
+        <section class="cards">
+            <div class="card-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 80'%3E%3Crect width='200' height='80' fill='%23e74c3c'/%3E%3Ccircle cx='60' cy='40' r='15' fill='%23ff6b35'/%3E%3Ctext x='100' y='45' text-anchor='middle' fill='white' font-family='Arial' font-size='18' font-weight='bold'%3EMarsCode%3C/text%3E%3C/svg%3E" alt="MarsCode">
+            </div>
+            <div class="card-content">
+                <h3 class="name">MarsCode</h3>
+                <div class="all-info">
+                    <h5 class="info">Ram : 16GB | CPU : 16 Core | Disk : 300GB</h5>
+                    <h5 class="info"><span class="no">Renew</span> | <span class="yes">Sudo</span> | <span class="no">24/7</span></h5>
+                    <h5 class="info">Singapore</h5>
+                </div>
+                <button class="visit" onclick="window.location.href='https://www.marscode.com/'">Visit</button>
+            </div>
+        </section>
+        
+        <section class="cards">
+            <div class="card-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 80'%3E%3Crect width='200' height='80' fill='%2300d4aa'/%3E%3Cpath d='M60 25 L80 25 L80 35 L70 35 L70 45 L80 45 L80 55 L60 55 Z' fill='white'/%3E%3Ctext x='120' y='45' text-anchor='middle' fill='white' font-family='Arial' font-size='14' font-weight='bold'%3ECodeAnyWhere%3C/text%3E%3C/svg%3E" alt="CodeAnyWhere">
+            </div>
+            <div class="card-content">
+                <h3 class="name">CodeAnyWhere</h3>
+                <div class="all-info">
+                    <h5 class="info">Ram : 8GB | CPU : 4 Core | Disk : 100GB</h5>
+                    <h5 class="info"><span class="no">Renew</span> | <span class="yes">Sudo</span> | <span class="no">24/7</span></h5>
+                    <h5 class="info">New York</h5>
+                </div>
+                <button class="visit" onclick="window.location.href='https://app.codeanywhere.com/'">Visit</button>
+            </div>
+        </section>
+        
+        <section class="cards">
+            <div class="card-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 80'%3E%3Crect width='200' height='80' fill='%23161b22'/%3E%3Cpath d='M100 20 C85 20 75 30 75 40 C75 50 85 60 100 60 C115 60 125 50 125 40 C125 30 115 20 100 20 Z M100 25 C110 25 118 32 118 40 C118 48 110 55 100 55 C90 55 82 48 82 40 C82 32 90 25 100 25 Z' fill='white'/%3E%3Ctext x='100' y='70' text-anchor='middle' fill='white' font-family='Arial' font-size='14' font-weight='bold'%3EGitHub%3C/text%3E%3C/svg%3E" alt="GitHub">
+            </div>
+            <div class="card-content">
+                <h3 class="name">GitHub</h3>
+                <div class="all-info">
+                    <h5 class="info">Ram : 16GB | CPU : 4 Core | Disk : 32GB</h5>
+                    <h5 class="info"><span class="no">Renew</span> | <span class="yes">Sudo</span> | <span class="no">24/7</span></h5>
+                    <h5 class="info">India</h5>
+                </div>
+                <button class="visit" onclick="window.location.href='https://github.com/'">Visit</button>
+            </div>
+        </section>
+        
+        <section class="cards">
+            <div class="card-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 80'%3E%3Crect width='200' height='80' fill='%23ff8a00'/%3E%3Ccircle cx='70' cy='40' r='12' fill='white'/%3E%3Ctext x='120' y='45' text-anchor='middle' fill='white' font-family='Arial' font-size='18' font-weight='bold'%3EGitpod%3C/text%3E%3C/svg%3E" alt="Gitpod">
+            </div>
+            <div class="card-content">
+                <h3 class="name">Gitpod</h3>
+                <div class="all-info">
+                    <h5 class="info">Ram : 16GB | CPU : 8 Core | Disk : 32GB</h5>
+                    <h5 class="info"><span class="no">Renew</span> | <span class="yes">Sudo</span> | <span class="no">24/7</span></h5>
+                    <h5 class="info">USA</h5>
+                </div>
+                <button class="visit" onclick="window.location.href='https://gitpod.io/'">Visit</button>
+            </div>
+        </section>
+        
+        <section class="cards">
+            <div class="card-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 80'%3E%3Crect width='200' height='80' fill='%232d5aa0'/%3E%3Cpath d='M60 25 L80 40 L60 55 L65 50 L75 40 L65 30 Z M85 25 L105 40 L85 55 L90 50 L100 40 L90 30 Z' fill='%2300d4aa'/%3E%3Ctext x='130' y='45' text-anchor='middle' fill='white' font-family='Arial' font-size='16' font-weight='bold'%3EDeepNote%3C/text%3E%3C/svg%3E" alt="DeepNote">
+            </div>
+            <div class="card-content">
+                <h3 class="name">DeepNote</h3>
+                <div class="all-info">
+                    <h5 class="info">Ram : 5GB | CPU : 2 Core | Disk : ?GB</h5>
+                    <h5 class="info"><span class="no">Renew</span> | <span class="yes">Sudo</span> | <span class="yes">24/7</span></h5>
+                    <h5 class="info">USA</h5>
+                </div>
+                <button class="visit" onclick="window.location.href='https://deepnote.com/'">Visit</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2025 by EmpressStore
+    </footer>
+</body>
+</html>
