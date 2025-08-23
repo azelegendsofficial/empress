@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Store - Minecraft for Windows</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px 0;
+            border-bottom: 1px solid #444;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #00d4ff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #00d4ff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .hero-section {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .game-cover {
+            flex-shrink: 0;
+        }
+
+        .game-cover img {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .game-info {
+            flex: 1;
+        }
+
+        .game-title {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #00d4ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .game-meta {
+            color: #bbbbbb;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .stars {
+            color: #ffd700;
+            font-size: 16px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #00d4ff, #0088ff);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 136, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            color: #00d4ff;
+        }
+
+        .addons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .addon-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 15px;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .addon-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .addon-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .addon-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .addon-price {
+            color: #00ff88;
+            font-size: 12px;
+        }
+
+        .description-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .description-text {
+            line-height: 1.6;
+            color: #cccccc;
+        }
+
+        .video-section {
+            margin-bottom: 40px;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #2d4a87, #1a237e);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="10" height="10" fill="%2300d4ff" opacity="0.1"/><rect x="10" y="10" width="10" height="10" fill="%2300ff88" opacity="0.1"/></svg>') repeat;
+        }
+
+        .play-button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 1;
+        }
+
+        .play-button:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .related-games {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .related-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 20px;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .related-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .related-card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .related-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .related-meta {
+            color: #999;
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .game-cover img {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .game-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                🚀 Space Store
+            </div>
+            <nav class="nav-links">
+                <a href="#">Beranda</a>
+                <a href="#">Games</a>
+                <a href="#">Add-ons</a>
+                <a href="#">Komunitas</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="hero-section">
+            <div class="game-cover">
+                <img src="https://store-images.s-microsoft.com/image/apps.31326.13510798885735219.3dfb176a-2479-4b17-ab6e-418794f3932d.a8aae002-3be2-4cd4-9ca3-b3e2e7e14882?w=150" alt="Minecraft">
+            </div>
+            <div class="game-info">
+                <h1 class="game-title">Minecraft for Windows</h1>
+                <div class="game-meta">
+                    Adventure • Building • Multiplayer • Simulation
+                </div>
+                <div class="rating">
+                    <div class="stars">★★★★☆</div>
+                    <span>4.3K reviews</span>
+                </div>
+                <p class="description-text">
+                    Jelajahi dunia tak terbatas dan bangun apapun yang bisa kamu bayangkan! Dari rumah sederhana hingga istana megah, kreativitasmu adalah batasnya. Bertahan hidup di malam hari atau ciptakan dunia impianmu di mode kreatif.
+                </p>
+                <div class="action-buttons">
+                    <button class="btn btn-primary">Install Game</button>
+                    <button class="btn btn-secondary">Game Pass</button>
+                    <button class="btn btn-secondary">♡ Wishlist</button>
+                    <button class="btn btn-secondary">⚙️ Options</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="video-section">
+            <h2 class="section-title">Trailer Game</h2>
+            <div class="video-placeholder">
+                <div class="play-button">▶</div>
+            </div>
+        </div>
+
+        <section class="addons-section">
+            <h2 class="section-title">Add-ons untuk game ini</h2>
+            <div class="addons-grid">
+                <div class="addon-card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 120'%3E%3Crect width='150' height='120' fill='%23FF6B35'/%3E%3Crect x='10' y='10' width='130' height='100' fill='%23FF8C42'/%3E%3Ctext x='75' y='65' text-anchor='middle' fill='white' font-size='12'%3ECaves %26 Cliffs%3C/text%3E%3C/svg%3E" alt="Caves & Cliffs">
+                    <div class="addon-title">Caves & Cliffs Update</div>
+                    <div class="addon-price">Rp25.000</div>
+                </div>
+                <div class="addon-card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 120'%3E%3Crect width='150' height='120' fill='%239C27B0'/%3E%3Crect x='10' y='10' width='130' height='100' fill='%23BA68C8'/%3E%3Ctext x='75' y='65' text-anchor='middle' fill='white' font-size='12'%3ENether Update%3C/text%3E%3C/svg%3E" alt="Nether Update">
+                    <div class="addon-title">Nether Update Pack</div>
+                    <div class="addon-price">Rp20.000</div>
+                </div>
+                <div class="addon-card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 120'%3E%3Crect width='150' height='120' fill='%232196F3'/%3E%3Crect x='10' y='10' width='130' height='100' fill='%2364B5F6'/%3E%3Ctext x='75' y='65' text-anchor='middle' fill='white' font-size='12'%3EOcean Pack%3C/text%3E%3C/svg%3E" alt="Ocean Pack">
+                    <div class="addon-title">Aquatic Adventure</div>
+                    <div class="addon-price">Rp15.000</div>
+                </div>
+                <div class="addon-card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 120'%3E%3Crect width='150' height='120' fill='%234CAF50'/%3E%3Crect x='10' y='10' width='130' height='100' fill='%2381C784'/%3E%3Ctext x='75' y='65' text-anchor='middle' fill='white' font-size='12'%3EVillage Pack%3C/text%3E%3C/svg%3E" alt="Village Pack">
+                    <div class="addon-title">Village & Pillage</div>
+                    <div class="addon-price">Rp18.000</div>
+                </div>
+                <div class="addon-card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 120'%3E%3Crect width='150' height='120' fill='%23FF9800'/%3E%3Crect x='10' y='10' width='130' height='100' fill='%23FFB74D'/%3E%3Ctext x='75' y='65' text-anchor='middle' fill='white' font-size='12'%3EBee Pack%3C/text%3E%3C/svg%3E" alt="Bee Pack">
+                    <div class="addon-title">Buzzy Bees Pack</div>
+                    <div class="addon-price">Rp12.000</div>
+                </div>
+                <div class="addon-card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 120'%3E%3Crect width='150' height='120' fill='%23795548'/%3E%3Crect x='10' y='10' width='130' height='100' fill='%23A1887F'/%3E%3Ctext x='75' y='65' text-anchor='middle' fill='white' font-size='12'%3EDesert Pack%3C/text%3E%3C/svg%3E" alt="Desert Pack">
+                    <div class="addon-title">Desert Adventure</div>
+                    <div class="addon-price">Rp16.000</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="description-section">
+            <h2 class="section-title">Deskripsi</h2>
+            <div class="description-text">
+                <p>Minecraft adalah game sandbox yang memungkinkan pemain untuk membangun dan menjelajahi dunia virtual yang dibuat dari blok-blok. Game ini menawarkan kebebasan kreatif yang tak terbatas dengan mode permainan yang beragam.</p>
+                
+                <p style="margin-top: 20px;"><strong>Fitur Utama:</strong></p>
+                <p>• Mode Creative untuk membangun tanpa batas dengan sumber daya tak terbatas<br>
+                • Mode Survival untuk pengalaman menantang dengan monster dan kebutuhan bertahan hidup<br>
+                • Multiplayer untuk bermain bersama teman hingga 10 pemain<br>
+                • Cross-platform play dengan Xbox, PlayStation, Nintendo Switch, iOS, dan Android<br>
+                • Regular updates dengan konten baru, biome, mob, dan fitur<br>
+                • Marketplace dengan ribuan add-on, skin, dan texture pack<br>
+                • Redstone engineering untuk membuat mekanisme kompleks</p>
+                
+                <p style="margin-top: 20px;">Rasakan pengalaman Minecraft terbaik di Windows 10 dengan performa yang dioptimalkan dan fitur-fitur eksklusif!</p>
+            </div>
+        </section>
+
+        <section class="related-section">
+            <h2 class="section-title">Game Serupa</h2>
+            <div class="related-games">
+                <div class="related-card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 250 140'%3E%3Crect width='250' height='140' fill='%234FC3F7'/%3E%3Crect x='20' y='20' width='210' height='100' fill='%2329B6F6'/%3E%3Ctext x='125' y='75' text-anchor='middle' fill='white' font-size='14'%3EMinecraft Java%3C/text%3E%3C/svg%3E" alt="Minecraft Java">
+                    <div class="related-title">Minecraft Java Edition</div>
+                    <div class="related-meta">Adventure • Building</div>
+                </div>
+                <div class="related-card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 250 140'%3E%3Crect width='250' height='140' fill='%23AB47BC'/%3E%3Crect x='20' y='20' width='210' height='100' fill='%239C27B0'/%3E%3Ctext x='125' y='75' text-anchor='middle' fill='white' font-size='14'%3EMinecraft Dungeons%3C/text%3E%3C/svg%3E" alt="Minecraft Dungeons">
+                    <div class="related-title">Minecraft Dungeons</div>
+                    <div class="related-meta">Action • Adventure</div>
+                </div>
+                <div class="related-card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 250 140'%3E%3Crect width='250' height='140' fill='%2366BB6A'/%3E%3Crect x='20' y='20' width='210' height='100' fill='%234CAF50'/%3E%3Ctext x='125' y='75' text-anchor='middle' fill='white' font-size='14'%3EMinecraft Earth%3C/text%3E%3C/svg%3E" alt="Minecraft Earth">
+                    <div class="related-title">Minecraft Earth</div>
+                    <div class="related-meta">AR • Adventure</div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
