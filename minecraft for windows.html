@@ -450,11 +450,14 @@
             const placeholder = document.getElementById('videoPlaceholder');
             const video = document.getElementById('minecraftVideo');
             
-            placeholder.style.display = 'none';
-            video.style.display = 'block';
+            // Hide placeholder dengan fade effect
+            placeholder.classList.add('hidden');
             
-            // Autoplay the video
-            video.src = video.src + "&autoplay=1";
+            // Update video src untuk autoplay
+            const currentSrc = video.src;
+            if (!currentSrc.includes('autoplay=1')) {
+                video.src = currentSrc + "&autoplay=1";
+            }
         }
         </script>
     </div>
