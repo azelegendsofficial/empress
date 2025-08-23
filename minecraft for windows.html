@@ -356,8 +356,17 @@
 
         <div class="video-section">
             <h2 class="section-title">Trailer Game</h2>
-            <div class="video-placeholder">
-                <div class="play-button">▶</div>
+            <div class="video-container">
+                <div class="video-placeholder" id="videoPlaceholder" onclick="playVideo()">
+                    <img class="video-thumbnail" src="data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="10" height="10" fill="%2300d4ff" opacity="0.1"/><rect x="10" y="10" width="10" height="10" fill="%2300ff88" opacity="0.1" alt="Minecraft Trailer">
+                    <div class="play-button" id="playButton">▶</div>
+                </div>
+                <iframe class="minecraft-video" id="minecraftVideo" 
+                    src="https://www.youtube.com/embed/MmB9b5njVbA?enablejsapi=1" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
             </div>
         </div>
 
