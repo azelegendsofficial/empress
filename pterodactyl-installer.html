@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pterodactyl Auto Installer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .logo svg {
+            width: 40px;
+            height: 40px;
+            fill: white;
+        }
+
+        h1 {
+            color: #1f2937;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #374151;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f9fafb;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .install-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .install-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .install-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 10% auto;
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            animation: modalAppear 0.3s ease-out;
+        }
+
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid #e5e7eb;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: #10b981;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .success-icon svg {
+            width: 40px;
+            height: 40px;
+            fill: white;
+        }
+
+        .wget-command {
+            background: #1f2937;
+            color: #10b981;
+            padding: 20px;
+            border-radius: 12px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            margin: 20px 0;
+            word-break: break-all;
+            position: relative;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #374151;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: #4b5563;
+        }
+
+        .close-btn {
+            background: #6b7280;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: #4b5563;
+        }
+
+        .instructions {
+            background: #f0f9ff;
+            border: 1px solid #0ea5e9;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .instructions h4 {
+            color: #0369a1;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .instructions ol {
+            color: #0c4a6e;
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .modal-content {
+                padding: 30px 20px;
+                margin: 5% auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
+                    <path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h1>Pterodactyl Installer</h1>
+            <p class="subtitle">Automatic installation script generator</p>
+        </div>
+
+        <form id="vpsForm">
+            <div class="form-group">
+                <label for="ipAddress">IP Address</label>
+                <input type="text" id="ipAddress" name="ipAddress" placeholder="192.168.1.1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="provider">Provider</label>
+                <input type="text" id="provider" name="provider" placeholder="DigitalOcean, AWS, Vultr, etc." required>
+            </div>
+
+            <div class="form-group">
+                <label for="region">Region</label>
+                <input type="text" id="region" name="region" placeholder="Singapore, New York, London" required>
+            </div>
+
+            <div class="form-group">
+                <label for="domain">Domain</label>
+                <input type="text" id="domain" name="domain" placeholder="panel.yourdomain.com" required>
+            </div>
+
+            <button type="submit" class="install-btn">Generate Install Script</button>
+        </form>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div id="loadingState">
+                <div class="loading-spinner"></div>
+                <h3 style="color: #374151; margin-bottom: 10px;">Generating Script...</h3>
+                <p style="color: #6b7280;">Please wait while we create your custom installation script.</p>
+            </div>
+
+            <div id="successState" style="display: none;">
+                <div class="success-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3 style="color: #374151; margin-bottom: 10px;">Script Generated Successfully!</h3>
+                <p style="color: #6b7280; margin-bottom: 20px;">Copy the command below and run it on your VPS:</p>
+                
+                <div class="wget-command">
+                    <button class="copy-btn" onclick="copyToClipboard()">Copy</button>
+                    <div id="wgetCommand"></div>
+                </div>
+
+                <div class="instructions">
+                    <h4>Installation Steps:</h4>
+                    <ol>
+                        <li>Connect to your VPS via SSH</li>
+                        <li>Copy and paste the wget command above</li>
+                        <li>Press Enter to download the script</li>
+                        <li>Run: <code>chmod +x install.sh</code></li>
+                        <li>Execute: <code>./install.sh</code> or <code>bash install.sh</code></li>
+                    </ol>
+                </div>
+
+                <button class="close-btn" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let generatedScript = '';
+
+        document.getElementById('vpsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const ipAddress = document.getElementById('ipAddress').value;
+            const provider = document.getElementById('provider').value;
+            const region = document.getElementById('region').value;
+            const domain = document.getElementById('domain').value;
+
+            // Validate IP address format
+            const ipRegex = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+            if (!ipRegex.test(ipAddress)) {
+                alert('Please enter a valid IP address');
+                return;
+            }
+
+            // Show modal with loading state
+            showModal();
+            
+            // Generate script after delay (simulating server processing)
+            setTimeout(() => {
+                generateInstallScript(ipAddress, provider, region, domain);
+                showSuccess();
+            }, 3000);
+        });
+
+        function showModal() {
+            document.getElementById('modal').style.display = 'block';
+            document.getElementById('loadingState').style.display = 'block';
+            document.getElementById('successState').style.display = 'none';
+        }
+
+        function generateInstallScript(ip, provider, region, domain) {
+            // Generate the actual installation script
+            generatedScript = `#!/bin/bash
+
+# Pterodactyl Panel Auto Installer
+# Generated for: ${ip}
+# Provider: ${provider}
+# Region: ${region}
+# Domain: ${domain}
+
+echo "==================================================="
+echo "    Pterodactyl Panel Auto Installer v1.0"
+echo "==================================================="
+echo "IP: ${ip}"
+echo "Provider: ${provider}"
+echo "Region: ${region}"
+echo "Domain: ${domain}"
+echo "==================================================="
+
+# Update system
+echo "Updating system packages..."
+apt update && apt upgrade -y
+
+# Install required packages
+echo "Installing required packages..."
+apt install -y software-properties-common curl apt-transport-https ca-certificates gnupg
+
+# Add PHP repository
+add-apt-repository -y ppa:ondrej/php
+apt update
+
+# Install PHP and extensions
+echo "Installing PHP and extensions..."
+apt install -y php8.1 php8.1-cli php8.1-gd php8.1-mysql php8.1-pdo php8.1-mbstring php8.1-tokenizer php8.1-bcmath php8.1-xml php8.1-fpm php8.1-curl php8.1-zip
+
+# Install Composer
+echo "Installing Composer..."
+curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Install MariaDB
+echo "Installing MariaDB..."
+apt install -y mariadb-server
+
+# Install Nginx
+echo "Installing Nginx..."
+apt install -y nginx
+
+# Install Redis
+echo "Installing Redis..."
+apt install -y redis-server
+
+# Start services
+systemctl start mariadb nginx redis-server php8.1-fpm
+systemctl enable mariadb nginx redis-server php8.1-fpm
+
+# Create database
+echo "Setting up database..."
+mysql -e "CREATE DATABASE panel;"
+mysql -e "CREATE USER 'pterodactyl'@'127.0.0.1' IDENTIFIED BY 'yourPassword123';"
+mysql -e "GRANT ALL PRIVILEGES ON panel.* TO 'pterodactyl'@'127.0.0.1' WITH GRANT OPTION;"
+mysql -e "FLUSH PRIVILEGES;"
+
+# Download Pterodactyl
+echo "Downloading Pterodactyl Panel..."
+mkdir -p /var/www/pterodactyl
+cd /var/www/pterodactyl
+curl -Lo panel.tar.gz https://github.com/pterodactyl/panel/releases/latest/download/panel.tar.gz
+tar -xzvf panel.tar.gz
+chmod -R 755 storage/* bootstrap/cache/
+
+# Install dependencies
+echo "Installing Pterodactyl dependencies..."
+composer install --no-dev --optimize-autoloader
+
+# Environment setup
+echo "Setting up environment..."
+php artisan key:generate --force
+php artisan p:environment:setup
+
+# Database setup
+echo "Setting up database..."
+php artisan migrate --seed --force
+
+# Create admin user
+echo "Creating admin user..."
+php artisan p:user:make
+
+# Set permissions
+chown -R www-data:www-data /var/www/pterodactyl/*
+
+# Configure Nginx
+cat > /etc/nginx/sites-available/pterodactyl.conf << 'EOF'
+server {
+    listen 80;
+    server_name ${domain};
+    root /var/www/pterodactyl/public;
+    index index.php;
+
+    access_log /var/log/nginx/pterodactyl.app-access.log;
+    error_log  /var/log/nginx/pterodactyl.app-error.log error;
+
+    client_max_body_size 100m;
+    client_body_timeout 120s;
+
+    sendfile off;
+
+    location / {
+        try_files \\$uri \\$uri/ /index.php?\\$query_string;
+    }
+
+    location ~ \\.php\\$ {
+        fastcgi_split_path_info ^(.+\\.php)(/.+)\\$;
+        fastcgi_pass unix:/run/php/php8.1-fpm.sock;
+        fastcgi_index index.php;
+        include fastcgi_params;
+        fastcgi_param PHP_VALUE "upload_max_filesize = 100M \\n post_max_size=100M";
+        fastcgi_param SCRIPT_FILENAME \\$document_root\\$fastcgi_script_name;
+        fastcgi_param HTTP_PROXY "";
+        fastcgi_intercept_errors off;
+        fastcgi_buffer_size 16k;
+        fastcgi_buffers 4 16k;
+        fastcgi_connect_timeout 300;
+        fastcgi_send_timeout 300;
+        fastcgi_read_timeout 300;
+        include /etc/nginx/fastcgi_params;
+    }
+
+    location ~ /\\.ht {
+        deny all;
+    }
+}
+EOF
+
+# Enable site
+ln -s /etc/nginx/sites-available/pterodactyl.conf /etc/nginx/sites-enabled/pterodactyl.conf
+
+# Remove default nginx site
+rm -f /etc/nginx/sites-enabled/default
+
+# Test nginx configuration
+nginx -t
+
+# Restart services
+systemctl restart nginx
+systemctl restart php8.1-fpm
+
+# Setup queue worker
+cat > /etc/systemd/system/pteroq.service << 'EOF'
+[Unit]
+Description=Pterodactyl Queue Worker
+After=redis-server.service
+
+[Service]
+User=www-data
+Group=www-data
+Restart=always
+ExecStart=/usr/bin/php /var/www/pterodactyl/artisan queue:work --queue=high,standard,low --sleep=3 --tries=3
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl enable pteroq.service
+systemctl start pteroq.service
+
+# Setup cron
+(crontab -l 2>/dev/null; echo "* * * * * php /var/www/pterodactyl/artisan schedule:run >> /dev/null 2>&1") | crontab -
+
+echo "==================================================="
+echo "    Installation Complete!"
+echo "==================================================="
+echo "Panel URL: http://${domain}"
+echo "Database: panel"
+echo "DB User: pterodactyl"
+echo "DB Password: yourPassword123"
+echo "==================================================="
+echo "Please configure SSL certificate for production use!"
+echo "==================================================="
+`;
+
+            // Create the wget command
+            const wgetCommand = `wget https://spacestore.ddns.net/${ip}/install.sh && chmod +x install.sh`;
+            document.getElementById('wgetCommand').textContent = wgetCommand;
+        }
+
+        function showSuccess() {
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('successState').style.display = 'block';
+        }
+
+        function copyToClipboard() {
+            const wgetText = document.getElementById('wgetCommand').textContent;
+            navigator.clipboard.writeText(wgetText).then(function() {
+                const copyBtn = document.querySelector('.copy-btn');
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = 'Copied!';
+                copyBtn.style.background = '#10b981';
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                    copyBtn.style.background = '#374151';
+                }, 2000);
+            });
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+            // Reset form
+            document.getElementById('vpsForm').reset();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Add some interactive effects
+        document.querySelectorAll('input[type="text"]').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'translateY(-2px)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
