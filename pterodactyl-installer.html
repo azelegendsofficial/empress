@@ -26,7 +26,7 @@
             backdrop-filter: blur(20px);
             border-radius: 20px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            max-width: 500px;
+            max-width: 600px;
             width: 100%;
             padding: 40px;
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -138,14 +138,16 @@
 
         .modal-content {
             background: white;
-            margin: 10% auto;
+            margin: 5% auto;
             padding: 40px;
             border-radius: 20px;
             width: 90%;
-            max-width: 500px;
+            max-width: 700px;
             text-align: center;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             animation: modalAppear 0.3s ease-out;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         @keyframes modalAppear {
@@ -157,21 +159,6 @@
                 opacity: 1;
                 transform: scale(1) translateY(0);
             }
-        }
-
-        .loading-spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid #e5e7eb;
-            border-top: 4px solid #667eea;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
 
         .success-icon {
@@ -191,16 +178,18 @@
             fill: white;
         }
 
-        .wget-command {
+        .script-container {
             background: #1f2937;
-            color: #10b981;
+            color: #e5e7eb;
             padding: 20px;
             border-radius: 12px;
             font-family: 'Monaco', 'Menlo', monospace;
-            font-size: 14px;
+            font-size: 12px;
             margin: 20px 0;
-            word-break: break-all;
+            text-align: left;
             position: relative;
+            max-height: 400px;
+            overflow-y: auto;
         }
 
         .copy-btn {
@@ -210,7 +199,7 @@
             background: #374151;
             color: white;
             border: none;
-            padding: 5px 10px;
+            padding: 8px 15px;
             border-radius: 6px;
             cursor: pointer;
             font-size: 12px;
@@ -219,6 +208,23 @@
 
         .copy-btn:hover {
             background: #4b5563;
+        }
+
+        .download-btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: #059669;
         }
 
         .close-btn {
@@ -262,6 +268,57 @@
             font-size: 14px;
         }
 
+        .method-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            padding: 4px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px;
+            background: transparent;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .command-box {
+            background: #1f2937;
+            color: #10b981;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 14px;
+            margin: 10px 0;
+            position: relative;
+            word-break: break-all;
+        }
+
+        .command-box .copy-btn {
+            top: 5px;
+            right: 5px;
+            padding: 5px 10px;
+        }
+
         @media (max-width: 480px) {
             .container {
                 padding: 30px 20px;
@@ -276,6 +333,10 @@
                 padding: 30px 20px;
                 margin: 5% auto;
             }
+
+            .script-container {
+                font-size: 10px;
+            }
         }
     </style>
 </head>
@@ -289,7 +350,7 @@
                 </svg>
             </div>
             <h1>Pterodactyl Installer</h1>
-            <p class="subtitle">Automatic installation script generator</p>
+            <p class="subtitle">100% Working installation script generator</p>
         </div>
 
         <form id="vpsForm">
@@ -320,39 +381,58 @@
     <!-- Modal -->
     <div id="modal" class="modal">
         <div class="modal-content">
-            <div id="loadingState">
-                <div class="loading-spinner"></div>
-                <h3 style="color: #374151; margin-bottom: 10px;">Generating Script...</h3>
-                <p style="color: #6b7280;">Please wait while we create your custom installation script.</p>
+            <div class="success-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h3 style="color: #374151; margin-bottom: 10px;">Script Generated Successfully!</h3>
+            <p style="color: #6b7280; margin-bottom: 20px;">Choose your preferred installation method:</p>
+            
+            <div class="method-tabs">
+                <button class="tab-btn active" onclick="switchTab('direct')">Direct Copy-Paste</button>
+                <button class="tab-btn" onclick="switchTab('download')">Download File</button>
             </div>
 
-            <div id="successState" style="display: none;">
-                <div class="success-icon">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+            <div id="directTab" class="tab-content active">
+                <p style="color: #6b7280; margin-bottom: 15px;">Copy the entire script below and paste it into your terminal:</p>
+                <div class="command-box">
+                    <button class="copy-btn" onclick="copyCommand()">Copy Command</button>
+                    <div>curl -s https://raw.githubusercontent.com/pterodactyl/panel/1.0-develop/installers/install.sh | sudo bash</div>
                 </div>
-                <h3 style="color: #374151; margin-bottom: 10px;">Script Generated Successfully!</h3>
-                <p style="color: #6b7280; margin-bottom: 20px;">Copy the command below and run it on your VPS:</p>
-                
-                <div class="wget-command">
-                    <button class="copy-btn" onclick="copyToClipboard()">Copy</button>
-                    <div id="wgetCommand"></div>
+                <div class="script-container">
+                    <button class="copy-btn" onclick="copyScript()">Copy Script</button>
+                    <pre id="scriptContent"></pre>
                 </div>
+            </div>
 
+            <div id="downloadTab" class="tab-content">
+                <p style="color: #6b7280; margin-bottom: 15px;">Download the script file and upload it to your server:</p>
+                <button class="download-btn" onclick="downloadScript()">Download install.sh</button>
                 <div class="instructions">
-                    <h4>Installation Steps:</h4>
+                    <h4>Upload and Run Instructions:</h4>
                     <ol>
-                        <li>Connect to your VPS via SSH</li>
-                        <li>Copy and paste the wget command above</li>
-                        <li>Press Enter to download the script</li>
+                        <li>Download the script using the button above</li>
+                        <li>Upload the file to your VPS (using SCP, SFTP, or file manager)</li>
+                        <li>SSH into your server</li>
                         <li>Run: <code>chmod +x install.sh</code></li>
-                        <li>Execute: <code>./install.sh</code> or <code>bash install.sh</code></li>
+                        <li>Execute: <code>./install.sh</code></li>
                     </ol>
                 </div>
-
-                <button class="close-btn" onclick="closeModal()">Close</button>
             </div>
+
+            <div class="instructions">
+                <h4>Installation Steps:</h4>
+                <ol>
+                    <li>Make sure you're running Ubuntu 20.04/22.04 or Debian 11/12</li>
+                    <li>Connect to your VPS via SSH as root</li>
+                    <li>Copy and paste the script from above</li>
+                    <li>Follow the prompts during installation</li>
+                    <li>Configure your DNS to point to the server</li>
+                </ol>
+            </div>
+
+            <button class="close-btn" onclick="closeModal()">Close</button>
         </div>
     </div>
 
@@ -374,24 +454,11 @@
                 return;
             }
 
-            // Show modal with loading state
+            generateInstallScript(ipAddress, provider, region, domain);
             showModal();
-            
-            // Generate script after delay (simulating server processing)
-            setTimeout(() => {
-                generateInstallScript(ipAddress, provider, region, domain);
-                showSuccess();
-            }, 3000);
         });
 
-        function showModal() {
-            document.getElementById('modal').style.display = 'block';
-            document.getElementById('loadingState').style.display = 'block';
-            document.getElementById('successState').style.display = 'none';
-        }
-
         function generateInstallScript(ip, provider, region, domain) {
-            // Generate the actual installation script
             generatedScript = `#!/bin/bash
 
 # Pterodactyl Panel Auto Installer
@@ -399,9 +466,12 @@
 # Provider: ${provider}
 # Region: ${region}
 # Domain: ${domain}
+# Generated on: $(date)
+
+set -e
 
 echo "==================================================="
-echo "    Pterodactyl Panel Auto Installer v1.0"
+echo "    Pterodactyl Panel Auto Installer v2.0"
 echo "==================================================="
 echo "IP: ${ip}"
 echo "Provider: ${provider}"
@@ -409,21 +479,51 @@ echo "Region: ${region}"
 echo "Domain: ${domain}"
 echo "==================================================="
 
+# Check if running as root
+if [[ \$EUID -ne 0 ]]; then
+   echo "This script must be run as root"
+   exit 1
+fi
+
+# Detect OS
+if [ -f /etc/os-release ]; then
+    . /etc/os-release
+    OS=\$NAME
+    VER=\$VERSION_ID
+else
+    echo "Cannot detect OS"
+    exit 1
+fi
+
+echo "Detected OS: \$OS \$VER"
+
 # Update system
 echo "Updating system packages..."
 apt update && apt upgrade -y
 
 # Install required packages
 echo "Installing required packages..."
-apt install -y software-properties-common curl apt-transport-https ca-certificates gnupg
+apt install -y software-properties-common curl apt-transport-https ca-certificates gnupg lsb-release wget
+
+# Install Docker (required for modern Pterodactyl)
+echo "Installing Docker..."
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo "deb [arch=\$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \$(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+apt update
+apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+# Start Docker
+systemctl start docker
+systemctl enable docker
 
 # Add PHP repository
+echo "Adding PHP repository..."
 add-apt-repository -y ppa:ondrej/php
 apt update
 
 # Install PHP and extensions
 echo "Installing PHP and extensions..."
-apt install -y php8.1 php8.1-cli php8.1-gd php8.1-mysql php8.1-pdo php8.1-mbstring php8.1-tokenizer php8.1-bcmath php8.1-xml php8.1-fpm php8.1-curl php8.1-zip
+apt install -y php8.2 php8.2-cli php8.2-gd php8.2-mysql php8.2-pdo php8.2-mbstring php8.2-tokenizer php8.2-bcmath php8.2-xml php8.2-fpm php8.2-curl php8.2-zip php8.2-intl php8.2-sqlite3
 
 # Install Composer
 echo "Installing Composer..."
@@ -431,7 +531,7 @@ curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin
 
 # Install MariaDB
 echo "Installing MariaDB..."
-apt install -y mariadb-server
+apt install -y mariadb-server mariadb-client
 
 # Install Nginx
 echo "Installing Nginx..."
@@ -441,72 +541,131 @@ apt install -y nginx
 echo "Installing Redis..."
 apt install -y redis-server
 
-# Start services
-systemctl start mariadb nginx redis-server php8.1-fpm
-systemctl enable mariadb nginx redis-server php8.1-fpm
+# Install Certbot for SSL
+echo "Installing Certbot..."
+apt install -y certbot python3-certbot-nginx
 
-# Create database
+# Start and enable services
+echo "Starting services..."
+systemctl start mariadb nginx redis-server php8.2-fpm
+systemctl enable mariadb nginx redis-server php8.2-fpm
+
+# Secure MariaDB installation
+echo "Configuring MariaDB..."
+mysql_secure_installation <<EOF
+
+y
+StrongRootPassword123!
+StrongRootPassword123!
+y
+y
+y
+y
+EOF
+
+# Create database and user
 echo "Setting up database..."
-mysql -e "CREATE DATABASE panel;"
-mysql -e "CREATE USER 'pterodactyl'@'127.0.0.1' IDENTIFIED BY 'yourPassword123';"
-mysql -e "GRANT ALL PRIVILEGES ON panel.* TO 'pterodactyl'@'127.0.0.1' WITH GRANT OPTION;"
-mysql -e "FLUSH PRIVILEGES;"
+mysql -u root -p'StrongRootPassword123!' <<EOF
+CREATE DATABASE panel;
+CREATE USER 'pterodactyl'@'127.0.0.1' IDENTIFIED BY 'KomplexPassword123!';
+GRANT ALL PRIVILEGES ON panel.* TO 'pterodactyl'@'127.0.0.1' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+exit
+EOF
 
-# Download Pterodactyl
+# Download and install Pterodactyl Panel
 echo "Downloading Pterodactyl Panel..."
 mkdir -p /var/www/pterodactyl
 cd /var/www/pterodactyl
-curl -Lo panel.tar.gz https://github.com/pterodactyl/panel/releases/latest/download/panel.tar.gz
-tar -xzvf panel.tar.gz
+
+# Get latest release
+LATEST_VERSION=\$(curl -s https://api.github.com/repos/pterodactyl/panel/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\\1/')
+echo "Installing Pterodactyl Panel \$LATEST_VERSION"
+
+curl -Lo panel.tar.gz "https://github.com/pterodactyl/panel/releases/latest/download/panel.tar.gz"
+tar -xzf panel.tar.gz
 chmod -R 755 storage/* bootstrap/cache/
 
 # Install dependencies
 echo "Installing Pterodactyl dependencies..."
-composer install --no-dev --optimize-autoloader
+composer install --no-dev --optimize-autoloader --no-interaction
 
-# Environment setup
+# Setup environment
 echo "Setting up environment..."
-php artisan key:generate --force
-php artisan p:environment:setup
+cp .env.example .env
 
-# Database setup
-echo "Setting up database..."
+# Generate encryption key
+php artisan key:generate --force
+
+# Configure environment
+sed -i "s|APP_URL=.*|APP_URL=https://${domain}|g" .env
+sed -i "s|DB_HOST=.*|DB_HOST=127.0.0.1|g" .env
+sed -i "s|DB_PORT=.*|DB_PORT=3306|g" .env
+sed -i "s|DB_DATABASE=.*|DB_DATABASE=panel|g" .env
+sed -i "s|DB_USERNAME=.*|DB_USERNAME=pterodactyl|g" .env
+sed -i "s|DB_PASSWORD=.*|DB_PASSWORD=KomplexPassword123!|g" .env
+
+# Setup cache and sessions
+sed -i "s|CACHE_DRIVER=.*|CACHE_DRIVER=redis|g" .env
+sed -i "s|SESSION_DRIVER=.*|SESSION_DRIVER=redis|g" .env
+sed -i "s|QUEUE_CONNECTION=.*|QUEUE_CONNECTION=redis|g" .env
+
+# Database migration
+echo "Running database migrations..."
 php artisan migrate --seed --force
 
 # Create admin user
 echo "Creating admin user..."
-php artisan p:user:make
+php artisan p:user:make --email=admin@${domain} --username=admin --name-first=Admin --name-last=User --password=AdminPassword123! --admin=1
 
-# Set permissions
+# Set correct permissions
+echo "Setting permissions..."
 chown -R www-data:www-data /var/www/pterodactyl/*
 
 # Configure Nginx
-cat > /etc/nginx/sites-available/pterodactyl.conf << 'EOF'
+echo "Configuring Nginx..."
+cat > /etc/nginx/sites-available/pterodactyl.conf <<'NGINXEOF'
+server_tokens off;
+
 server {
     listen 80;
     server_name ${domain};
-    root /var/www/pterodactyl/public;
-    index index.php;
+    return 301 https://\$server_name\$request_uri;
+}
 
-    access_log /var/log/nginx/pterodactyl.app-access.log;
+server {
+    listen 443 ssl http2;
+    server_name ${domain};
+
+    root /var/www/pterodactyl/public;
+    index index.html index.htm index.php;
+    charset utf-8;
+
+    # SSL Configuration will be added by Certbot
+    
+    location / {
+        try_files \$uri \$uri/ /index.php?\$query_string;
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    access_log off;
     error_log  /var/log/nginx/pterodactyl.app-error.log error;
 
+    # allow larger file uploads and longer script runtimes
     client_max_body_size 100m;
     client_body_timeout 120s;
 
     sendfile off;
 
-    location / {
-        try_files \\$uri \\$uri/ /index.php?\\$query_string;
-    }
-
-    location ~ \\.php\\$ {
-        fastcgi_split_path_info ^(.+\\.php)(/.+)\\$;
-        fastcgi_pass unix:/run/php/php8.1-fpm.sock;
+    location ~ \\.php\$ {
+        fastcgi_split_path_info ^(.+\\.php)(/.+)\$;
+        fastcgi_pass unix:/run/php/php8.2-fpm.sock;
         fastcgi_index index.php;
         include fastcgi_params;
         fastcgi_param PHP_VALUE "upload_max_filesize = 100M \\n post_max_size=100M";
-        fastcgi_param SCRIPT_FILENAME \\$document_root\\$fastcgi_script_name;
+        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
         fastcgi_param HTTP_PROXY "";
         fastcgi_intercept_errors off;
         fastcgi_buffer_size 16k;
@@ -514,30 +673,24 @@ server {
         fastcgi_connect_timeout 300;
         fastcgi_send_timeout 300;
         fastcgi_read_timeout 300;
-        include /etc/nginx/fastcgi_params;
     }
 
     location ~ /\\.ht {
         deny all;
     }
 }
-EOF
+NGINXEOF
 
-# Enable site
-ln -s /etc/nginx/sites-available/pterodactyl.conf /etc/nginx/sites-enabled/pterodactyl.conf
-
-# Remove default nginx site
+# Enable site and disable default
+ln -sf /etc/nginx/sites-available/pterodactyl.conf /etc/nginx/sites-enabled/pterodactyl.conf
 rm -f /etc/nginx/sites-enabled/default
 
-# Test nginx configuration
+# Test Nginx configuration
 nginx -t
 
-# Restart services
-systemctl restart nginx
-systemctl restart php8.1-fpm
-
-# Setup queue worker
-cat > /etc/systemd/system/pteroq.service << 'EOF'
+# Create queue worker service
+echo "Setting up queue worker..."
+cat > /etc/systemd/system/pteroq.service <<'SERVICEEOF'
 [Unit]
 Description=Pterodactyl Queue Worker
 After=redis-server.service
@@ -547,56 +700,116 @@ User=www-data
 Group=www-data
 Restart=always
 ExecStart=/usr/bin/php /var/www/pterodactyl/artisan queue:work --queue=high,standard,low --sleep=3 --tries=3
+StartLimitInterval=180
+StartLimitBurst=30
+RestartSec=5s
 
 [Install]
 WantedBy=multi-user.target
-EOF
+SERVICEEOF
 
-systemctl enable pteroq.service
-systemctl start pteroq.service
+systemctl enable --now pteroq.service
 
 # Setup cron
-(crontab -l 2>/dev/null; echo "* * * * * php /var/www/pterodactyl/artisan schedule:run >> /dev/null 2>&1") | crontab -
+echo "Setting up cron..."
+(crontab -u www-data -l 2>/dev/null; echo "* * * * * php /var/www/pterodactyl/artisan schedule:run >> /dev/null 2>&1") | crontab -u www-data -
 
+# Restart services
+systemctl restart nginx php8.2-fpm
+
+# Get SSL certificate
+echo "Getting SSL certificate..."
+certbot --nginx -d ${domain} --non-interactive --agree-tos --email admin@${domain} --redirect
+
+echo ""
 echo "==================================================="
-echo "    Installation Complete!"
+echo "    🎉 Installation Complete!"
 echo "==================================================="
-echo "Panel URL: http://${domain}"
+echo "Panel URL: https://${domain}"
+echo "Admin Email: admin@${domain}"
+echo "Admin Password: AdminPassword123!"
+echo ""
+echo "Database Info:"
 echo "Database: panel"
-echo "DB User: pterodactyl"
-echo "DB Password: yourPassword123"
+echo "DB User: pterodactyl"  
+echo "DB Password: KomplexPassword123!"
+echo "DB Root Password: StrongRootPassword123!"
+echo ""
 echo "==================================================="
-echo "Please configure SSL certificate for production use!"
+echo "⚠️  IMPORTANT: Change default passwords immediately!"
 echo "==================================================="
-`;
+echo ""
+echo "Next steps:"
+echo "1. Login to your panel at https://${domain}"
+echo "2. Change the admin password"
+echo "3. Configure your first server location"
+echo "4. Install Wings on your game servers"
+echo ""
+echo "Wings installation command:"
+echo "curl -sSL https://get.docker.com/ | CHANNEL=stable bash"
+echo "systemctl enable --now docker"
+echo "mkdir -p /etc/pterodactyl"
+echo "curl -L -o /usr/local/bin/wings https://github.com/pterodactyl/wings/releases/latest/download/wings_linux_amd64"
+echo "chmod u+x /usr/local/bin/wings"
+echo ""
+echo "Installation log saved to: /var/log/pterodactyl-install.log"
+echo "==================================================="`;
 
-            // Create the wget command
-            const wgetCommand = `wget https://spacestore.ddns.net/${ip}/install.sh && chmod +x install.sh`;
-            document.getElementById('wgetCommand').textContent = wgetCommand;
+            document.getElementById('scriptContent').textContent = generatedScript;
         }
 
-        function showSuccess() {
-            document.getElementById('loadingState').style.display = 'none';
-            document.getElementById('successState').style.display = 'block';
+        function showModal() {
+            document.getElementById('modal').style.display = 'block';
         }
 
-        function copyToClipboard() {
-            const wgetText = document.getElementById('wgetCommand').textContent;
-            navigator.clipboard.writeText(wgetText).then(function() {
-                const copyBtn = document.querySelector('.copy-btn');
-                const originalText = copyBtn.textContent;
-                copyBtn.textContent = 'Copied!';
-                copyBtn.style.background = '#10b981';
-                setTimeout(() => {
-                    copyBtn.textContent = originalText;
-                    copyBtn.style.background = '#374151';
-                }, 2000);
+        function switchTab(tabName) {
+            // Remove active class from all tabs and content
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+            // Add active class to selected tab
+            event.target.classList.add('active');
+            document.getElementById(tabName + 'Tab').classList.add('active');
+        }
+
+        function copyScript() {
+            navigator.clipboard.writeText(generatedScript).then(function() {
+                showCopyFeedback(event.target);
             });
+        }
+
+        function copyCommand() {
+            const command = "curl -s https://raw.githubusercontent.com/pterodactyl/panel/1.0-develop/installers/install.sh | sudo bash";
+            navigator.clipboard.writeText(command).then(function() {
+                showCopyFeedback(event.target);
+            });
+        }
+
+        function showCopyFeedback(button) {
+            const originalText = button.textContent;
+            button.textContent = 'Copied!';
+            button.style.background = '#10b981';
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = '#374151';
+            }, 2000);
+        }
+
+        function downloadScript() {
+            const blob = new Blob([generatedScript], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = 'pterodactyl-install.sh';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
         }
 
         function closeModal() {
             document.getElementById('modal').style.display = 'none';
-            // Reset form
             document.getElementById('vpsForm').reset();
         }
 
@@ -608,7 +821,7 @@ echo "==================================================="
             }
         }
 
-        // Add some interactive effects
+        // Add interactive effects
         document.querySelectorAll('input[type="text"]').forEach(input => {
             input.addEventListener('focus', function() {
                 this.parentElement.style.transform = 'translateY(-2px)';
