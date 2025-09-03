@@ -6,18 +6,21 @@
     <title>SpaceStore - Premium Minecraft Hosting</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
         
         :root {
-            --primary-green: #00ff41;
-            --dark-bg: #0a0a0a;
-            --darker-bg: #050505;
-            --card-bg: #111111;
-            --border-color: #1a1a1a;
+            --primary-green: #00ff88;
+            --primary-blue: #0066ff;
+            --primary-purple: #8b5cf6;
+            --dark-bg: #0a0a0f;
+            --darker-bg: #050507;
+            --card-bg: rgba(15, 15, 25, 0.8);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
             --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
-            --minecraft-grass: #7cb342;
-            --minecraft-stone: #808080;
-            --minecraft-diamond: #5dade2;
+            --text-secondary: #94a3b8;
+            --accent-gradient: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-blue) 50%, var(--primary-purple) 100%);
+            --glass-border: rgba(255, 255, 255, 0.15);
         }
 
         * {
@@ -34,204 +37,340 @@
             line-height: 1.6;
         }
 
-        /* Animated Background */
+        /* Modern Animated Background */
         .animated-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: -2;
             background: 
-                radial-gradient(circle at 25% 25%, rgba(0, 255, 65, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(93, 173, 226, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 20% 20%, rgba(0, 255, 136, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 102, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
                 linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
+            animation: backgroundShift 20s ease-in-out infinite;
         }
 
-        .grid-overlay {
+        @keyframes backgroundShift {
+            0%, 100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(30deg); }
+        }
+
+        .mesh-gradient {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.03;
-            background-image: 
-                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
-            background-size: 32px 32px;
-            animation: gridMove 20s linear infinite;
+            opacity: 0.4;
+            background: 
+                conic-gradient(from 0deg at 25% 25%, transparent, var(--primary-green) 20%, transparent 70%),
+                conic-gradient(from 180deg at 75% 75%, transparent, var(--primary-blue) 20%, transparent 70%);
+            filter: blur(100px);
+            animation: meshRotate 30s linear infinite;
         }
 
-        @keyframes gridMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(32px, 32px); }
+        @keyframes meshRotate {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
         }
 
-        /* Navigation */
+        /* Glassmorphism Navigation */
         nav {
             position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(10, 10, 10, 0.8);
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--glass-bg);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-color);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
             z-index: 1000;
-            padding: 1rem 0;
+            padding: 1rem 2rem;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
-        nav.scrolled {
-            background: rgba(5, 5, 5, 0.95);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        nav:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(-50%) translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
         }
 
         .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
+            gap: 3rem;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary-green);
-            text-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+            gap: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.25rem;
+            font-weight: 700;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .logo-icon {
-            width: 32px;
-            height: 32px;
-            fill: var(--primary-green);
-            filter: drop-shadow(0 0 10px rgba(0, 255, 65, 0.5));
+            width: 28px;
+            height: 28px;
+            background: var(--accent-gradient);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-3px) rotate(5deg); }
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .nav-links a {
             color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
             position: relative;
             padding: 0.5rem 1rem;
-            border-radius: 8px;
+            border-radius: 12px;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--accent-gradient);
+            border-radius: 12px;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s ease;
         }
 
         .nav-links a:hover {
-            color: var(--primary-green);
-            background: rgba(0, 255, 65, 0.05);
+            color: white;
+            transform: translateY(-1px);
         }
 
-        /* Hero Section */
+        .nav-links a:hover::before {
+            opacity: 0.1;
+        }
+
+        /* Modern Hero Section */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
+            padding: 120px 2rem 80px;
         }
 
         .hero-content {
             text-align: center;
-            max-width: 900px;
-            padding: 0 2rem;
+            max-width: 1000px;
             z-index: 2;
         }
 
         .hero-badge {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            background: rgba(0, 255, 65, 0.1);
-            border: 1px solid rgba(0, 255, 65, 0.2);
-            padding: 0.5rem 1rem;
+            gap: 0.75rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            padding: 0.75rem 1.5rem;
             border-radius: 50px;
             font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--primary-green);
+            font-weight: 600;
+            color: var(--text-primary);
             margin-bottom: 2rem;
             animation: fadeInUp 0.8s ease-out;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.2); }
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
+            font-size: clamp(3.5rem, 8vw, 7rem);
             font-weight: 900;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #ffffff 0%, var(--primary-green) 50%, var(--minecraft-diamond) 100%);
+            background: var(--accent-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             line-height: 1.1;
             animation: fadeInUp 0.8s ease-out 0.2s both;
-            text-shadow: 0 0 40px rgba(0, 255, 65, 0.3);
+            letter-spacing: -0.02em;
         }
 
-        .hero p {
-            font-size: 1.25rem;
+        .hero-subtitle {
+            font-size: 1.5rem;
             color: var(--text-secondary);
             margin-bottom: 3rem;
-            max-width: 600px;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
             animation: fadeInUp 0.8s ease-out 0.4s both;
+            font-weight: 400;
         }
 
         .cta-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
             justify-content: center;
             flex-wrap: wrap;
             animation: fadeInUp 0.8s ease-out 0.6s both;
         }
 
         .cta-primary, .cta-secondary {
-            padding: 1rem 2rem;
-            border-radius: 12px;
+            padding: 1.25rem 2.5rem;
+            border-radius: 16px;
             font-weight: 600;
             text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
             font-size: 1rem;
+            position: relative;
+            overflow: hidden;
         }
 
         .cta-primary {
-            background: var(--primary-green);
-            color: var(--dark-bg);
-            box-shadow: 0 8px 32px rgba(0, 255, 65, 0.3);
+            background: var(--accent-gradient);
+            color: white;
+            box-shadow: 0 8px 32px rgba(0, 255, 136, 0.3);
+        }
+
+        .cta-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .cta-primary:hover::before {
+            opacity: 1;
         }
 
         .cta-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 16px 48px rgba(0, 255, 65, 0.4);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 16px 48px rgba(0, 255, 136, 0.4);
         }
 
         .cta-secondary {
-            background: transparent;
+            background: var(--glass-bg);
             color: var(--text-primary);
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
         }
 
         .cta-secondary:hover {
-            background: var(--card-bg);
+            background: rgba(255, 255, 255, 0.1);
             border-color: var(--primary-green);
+            transform: translateY(-2px);
         }
 
-        /* Services Section */
+        /* Modern Stats Section */
+        .stats {
+            padding: 100px 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent-gradient);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .stat-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        /* Modern Services Section */
         .services {
             padding: 120px 2rem;
             max-width: 1400px;
@@ -245,44 +384,47 @@
 
         .section-badge {
             display: inline-block;
-            background: rgba(0, 255, 65, 0.1);
-            color: var(--primary-green);
-            padding: 0.5rem 1rem;
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            padding: 0.75rem 1.5rem;
             border-radius: 50px;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 600;
-            margin-bottom: 1rem;
-            border: 1px solid rgba(0, 255, 65, 0.2);
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
         }
 
         .section-title {
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 800;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #ffffff, var(--text-secondary));
+            margin-bottom: 1.5rem;
+            background: var(--accent-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            letter-spacing: -0.02em;
         }
 
         .section-description {
-            font-size: 1.125rem;
+            font-size: 1.25rem;
             color: var(--text-secondary);
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 2rem;
             margin-top: 4rem;
         }
 
         .service-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
             padding: 2.5rem;
             position: relative;
             overflow: hidden;
@@ -295,8 +437,8 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary-green), var(--minecraft-diamond), var(--minecraft-grass));
+            height: 3px;
+            background: var(--accent-gradient);
             transform: scaleX(0);
             transition: transform 0.4s ease;
         }
@@ -306,21 +448,31 @@
         }
 
         .service-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(0, 255, 65, 0.2);
+            transform: translateY(-12px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
             box-shadow: 0 32px 64px rgba(0, 0, 0, 0.3);
         }
 
         .service-icon {
             width: 64px;
             height: 64px;
-            margin-bottom: 1.5rem;
-            fill: var(--primary-green);
-            filter: drop-shadow(0 0 20px rgba(0, 255, 65, 0.3));
+            background: var(--accent-gradient);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .service-icon svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
         }
 
         .service-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             font-weight: 700;
             margin-bottom: 1rem;
             color: var(--text-primary);
@@ -329,20 +481,20 @@
         .service-card p {
             color: var(--text-secondary);
             margin-bottom: 2rem;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         .service-features {
             list-style: none;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
 
         .service-features li {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
             color: var(--text-secondary);
         }
 
@@ -350,50 +502,83 @@
             content: '✓';
             color: var(--primary-green);
             font-weight: bold;
+            font-size: 1.1rem;
         }
 
         .price-section {
             display: flex;
             align-items: baseline;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
         }
 
         .price {
-            font-size: 2rem;
+            font-size: 2.25rem;
             font-weight: 800;
-            color: var(--primary-green);
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .price-period {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 1rem;
         }
 
         .service-button {
             width: 100%;
-            background: transparent;
-            color: var(--primary-green);
-            border: 1px solid var(--primary-green);
-            padding: 1rem;
-            border-radius: 12px;
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            padding: 1.25rem;
+            border-radius: 16px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.95rem;
+            font-size: 1rem;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-button::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-button:hover::before {
+            opacity: 1;
         }
 
         .service-button:hover {
-            background: var(--primary-green);
-            color: var(--dark-bg);
-            transform: scale(1.02);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 16px 32px rgba(0, 255, 136, 0.3);
         }
 
-        /* Features Section */
+        /* Modern Features Section */
         .features {
             padding: 120px 2rem;
             background: var(--darker-bg);
-            border-top: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--accent-gradient);
+            opacity: 0.3;
         }
 
         .features-container {
@@ -403,79 +588,91 @@
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
             margin-top: 4rem;
         }
 
         .feature-item {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 2rem;
-            border-radius: 16px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            padding: 2.5rem;
+            border-radius: 20px;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-item::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(0, 255, 136, 0.1) 0%, transparent 70%);
+            transition: all 0.4s ease;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        .feature-item:hover::after {
+            width: 200px;
+            height: 200px;
         }
 
         .feature-item:hover {
-            transform: translateY(-4px);
-            border-color: rgba(0, 255, 65, 0.2);
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
         }
 
         .feature-icon {
-            width: 48px;
-            height: 48px;
+            width: 56px;
+            height: 56px;
+            background: var(--accent-gradient);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin: 0 auto 1.5rem;
-            fill: var(--primary-green);
-            filter: drop-shadow(0 0 15px rgba(0, 255, 65, 0.3));
+        }
+
+        .feature-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
         }
 
         .feature-item h4 {
-            font-size: 1.25rem;
+            font-size: 1.4rem;
             font-weight: 600;
             margin-bottom: 1rem;
         }
 
         .feature-item p {
             color: var(--text-secondary);
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
-        /* Stats Section */
-        .stats {
-            padding: 80px 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 900;
-            color: var(--primary-green);
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        /* Footer */
+        /* Modern Footer */
         footer {
             background: var(--darker-bg);
-            border-top: 1px solid var(--border-color);
-            padding: 4rem 2rem 2rem;
+            position: relative;
+            padding: 5rem 2rem 2rem;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--accent-gradient);
+            opacity: 0.3;
         }
 
         .footer-content {
@@ -485,7 +682,7 @@
 
         .footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 3rem;
             margin-bottom: 3rem;
         }
@@ -494,6 +691,7 @@
             font-weight: 700;
             margin-bottom: 1.5rem;
             color: var(--text-primary);
+            font-size: 1.2rem;
         }
 
         .footer-section a, .footer-section p {
@@ -501,12 +699,13 @@
             text-decoration: none;
             display: block;
             margin-bottom: 0.75rem;
-            transition: color 0.3s ease;
-            line-height: 1.6;
+            transition: all 0.3s ease;
+            line-height: 1.7;
         }
 
         .footer-section a:hover {
             color: var(--primary-green);
+            transform: translateX(5px);
         }
 
         .footer-bottom {
@@ -514,6 +713,7 @@
             padding-top: 2rem;
             text-align: center;
             color: var(--text-secondary);
+            font-size: 0.95rem;
         }
 
         /* Animations */
@@ -540,13 +740,27 @@
         }
 
         /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+        @media (max-width: 1024px) {
+            nav {
+                top: 10px;
+                left: 10px;
+                right: 10px;
+                transform: none;
+                border-radius: 16px;
+            }
+
+            .nav-container {
+                gap: 2rem;
             }
 
             .services-grid {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
             }
 
             .cta-buttons {
@@ -556,26 +770,34 @@
 
             .cta-primary, .cta-secondary {
                 width: 100%;
-                max-width: 300px;
+                max-width: 320px;
                 justify-content: center;
             }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 140px 1rem 60px;
+            }
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
         }
     </style>
 </head>
 <body>
     <div class="animated-bg"></div>
-    <div class="grid-overlay"></div>
+    <div class="mesh-gradient"></div>
 
     <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
             <div class="logo">
-                <svg class="logo-icon" viewBox="0 0 24 24">
-                    <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
-                    <path d="M8 11h8v2H8v-2z"/>
-                    <path d="M8 7h8v2H8V7z"/>
-                    <path d="M8 15h8v2H8v-2z"/>
-                </svg>
+                <div class="logo-icon">🚀</div>
                 SpaceStore
             </div>
             <ul class="nav-links">
@@ -591,26 +813,23 @@
     <section class="hero" id="home">
         <div class="hero-content">
             <div class="hero-badge">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                </svg>
-                Premium Minecraft Hosting
+                Premium Minecraft Hosting Experience
             </div>
-            <h1>Minecraft Server<br>Hosting Terbaik</h1>
-            <p>Hosting Minecraft server premium dengan performa tinggi, anti-lag, dan support 24/7. Cocok untuk komunitas gaming dan server besar.</p>
+            <h1>Next-Gen Gaming<br>Infrastructure</h1>
+            <p class="hero-subtitle">Hosting Minecraft server premium dengan teknologi terdepan, performa maksimal, dan uptime 99.9%. Rasakan pengalaman gaming yang tak terlupakan.</p>
             <div class="cta-buttons">
-                <a href="#services" class="cta-primary">
+                <a href="https://discord.gg" class="cta-primary" target="_blank">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M13 3v6h8l-10 12V9H3l10-6z"/>
                     </svg>
                     Mulai Sekarang
                 </a>
-                <a href="#features" class="cta-secondary">
+                <a href="#services" class="cta-secondary">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polygon points="23 7 16 12 23 17 23 7"></polygon>
                         <polygon points="14 5 14 19 7 12 14 5"></polygon>
                     </svg>
-                    Lihat Demo
+                    Lihat Paket
                 </a>
             </div>
         </div>
@@ -625,15 +844,15 @@
             </div>
             <div class="stat-item animate-on-scroll">
                 <span class="stat-number">99.9%</span>
-                <span class="stat-label">Uptime</span>
+                <span class="stat-label">Uptime Guarantee</span>
             </div>
             <div class="stat-item animate-on-scroll">
                 <span class="stat-number">24/7</span>
-                <span class="stat-label">Support</span>
+                <span class="stat-label">Expert Support</span>
             </div>
             <div class="stat-item animate-on-scroll">
-                <span class="stat-number">5000+</span>
-                <span class="stat-label">Happy Players</span>
+                <span class="stat-number">10K+</span>
+                <span class="stat-label">Happy Gamers</span>
             </div>
         </div>
     </section>
@@ -641,117 +860,125 @@
     <!-- Services Section -->
     <section class="services" id="services">
         <div class="section-header animate-on-scroll">
-            <div class="section-badge">Layanan Kami</div>
-            <h2 class="section-title">Pilihan Hosting Terbaik</h2>
-            <p class="section-description">Berbagai pilihan paket hosting yang disesuaikan dengan kebutuhan server Minecraft, bot Discord, dan VPS Anda</p>
+            <div class="section-badge">Layanan Premium</div>
+            <h2 class="section-title">Hosting Solutions</h2>
+            <p class="section-description">Pilihan hosting premium yang dirancang khusus untuk performa gaming terbaik dengan teknologi enterprise-grade</p>
         </div>
         
         <div class="services-grid">
             <div class="service-card animate-on-scroll">
-                <svg class="service-icon" viewBox="0 0 24 24">
-                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
-                    <rect x="7" y="7" width="3" height="3" fill="currentColor"/>
-                    <rect x="14" y="7" width="3" height="3" fill="currentColor"/>
-                    <rect x="7" y="14" width="10" height="3" fill="currentColor"/>
-                </svg>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <rect x="7" y="7" width="3" height="3"/>
+                        <rect x="14" y="7" width="3" height="3"/>
+                        <rect x="7" y="14" width="10" height="3"/>
+                    </svg>
+                </div>
                 <h3>Minecraft Server</h3>
-                <p>Server Minecraft premium dengan performa tinggi, anti-lag, dan support untuk semua plugin populer. Ideal untuk komunitas gaming.</p>
+                <p>Server Minecraft premium dengan performa tinggi, anti-lag teknologi terdepan, dan dukungan semua plugin populer. Cocok untuk komunitas gaming profesional.</p>
                 
                 <ul class="service-features">
-                    <li>RAM 4GB - 32GB</li>
-                    <li>CPU AMD EPYC 7003</li>
-                    <li>SSD NVMe Storage</li>
-                    <li>DDoS Protection</li>
-                    <li>Plugin Support</li>
-                    <li>Backup Otomatis</li>
+                    <li>RAM 4GB - 32GB DDR4</li>
+                    <li>CPU AMD EPYC 7003 Series</li>
+                    <li>NVMe SSD Storage</li>
+                    <li>Advanced DDoS Protection</li>
+                    <li>Full Plugin Support</li>
+                    <li>Real-time Auto Backup</li>
                 </ul>
                 
                 <div class="price-section">
-                    <span class="price">Rp 6K SAMPAI 82K</span>
-                    <span class="price-period">/bulan</span>
+                    <span class="price">6K - 82K</span>
+                    <span class="price-period">/month</span>
                 </div>
                 
-                <button class="service-button">Pilih Paket Minecraft</button>
+                <a href="/category/minecraft plan.html" class="service-button" target="_blank">Order Minecraft Server</a>
             </div>
 
             <div class="service-card animate-on-scroll">
-                <svg class="service-icon" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/>
-                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-                </svg>
-                <h3>Discord Bot</h3>
-                <p>Bot Discord custom dengan hosting 24/7, maintenance gratis, dan fitur lengkap untuk server Discord Anda.</p>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                    </svg>
+                </div>
+                <h3>Discord Bot Premium</h3>
+                <p>Bot Discord custom dengan hosting 24/7, maintenance gratis, dan fitur enterprise-grade untuk server Discord profesional Anda.</p>
         
                 <ul class="service-features">
-                    <li>Hosting 24/7</li>
-                    <li>Custom Commands</li>
-                    <li>Database Support</li>
-                    <li>Auto Updates</li>
-                    <li>Multi-Server</li>
-                    <li>Dashboard Panel</li>
+                    <li>24/7 Premium Hosting</li>
+                    <li>Custom Commands & Features</li>
+                    <li>Database Integration</li>
+                    <li>Auto Updates & Patches</li>
+                    <li>Multi-Server Support</li>
+                    <li>Advanced Analytics Dashboard</li>
                 </ul>
                 
                 <div class="price-section">
-                    <span class="price">Rp 10K</span>
-                    <span class="price-period">/bulan</span>
+                    <span class="price">10K</span>
+                    <span class="price-period">/month</span>
                 </div>
                 
-                <button class="service-button">Pilih Paket Bot</button>
+                <a href="/category/discord bot plan.html" class="service-button" target="_blank">Order Discord Bot</a>
             </div>
 
             <div class="service-card animate-on-scroll">
-                <svg class="service-icon" viewBox="0 0 24 24">
-                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
-                    <line x1="8" y1="21" x2="16" y2="21" stroke="currentColor" stroke-width="2"/>
-                    <line x1="12" y1="17" x2="12" y2="21" stroke="currentColor" stroke-width="2"/>
-                    <rect x="6" y="7" width="4" height="2" fill="currentColor"/>
-                    <rect x="6" y="11" width="8" height="2" fill="currentColor"/>
-                </svg>
-                <h3>VPS Premium</h3>
-                <p>Virtual Private Server dengan performa tinggi, SSD storage, dan akses root penuh untuk kebutuhan development dan hosting.</p>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <line x1="8" y1="21" x2="16" y2="21" stroke="currentColor" stroke-width="2"/>
+                        <line x1="12" y1="17" x2="12" y2="21" stroke="currentColor" stroke-width="2"/>
+                        <rect x="6" y="7" width="4" height="2"/>
+                        <rect x="6" y="11" width="8" height="2"/>
+                    </svg>
+                </div>
+                <h3>VPS Enterprise</h3>
+                <p>Virtual Private Server dengan performa enterprise-grade, SSD NVMe storage, dan akses root penuh untuk kebutuhan development dan hosting skala besar.</p>
                 
                 <ul class="service-features">
-                    <li>CPU 4-16 Cores</li>
-                    <li>RAM 8GB - 64GB</li>
-                    <li>SSD NVMe 200GB+</li>
-                    <li>Root Access</li>
-                    <li>Ubuntu/CentOS</li>
-                    <li>Free SSL</li>
+                    <li>CPU 4-16 Cores Intel Xeon</li>
+                    <li>RAM 8GB - 64GB DDR4</li>
+                    <li>NVMe SSD 200GB - 2TB</li>
+                    <li>Full Root Access</li>
+                    <li>Ubuntu/CentOS/Windows</li>
+                    <li>Free SSL & CDN</li>
                 </ul>
                 
                 <div class="price-section">
-                    <span class="price">Rp 150K</span>
-                    <span class="price-period">/bulan</span>
+                    <span class="price">150K</span>
+                    <span class="price-period">/month</span>
                 </div>
                 
-                <button class="service-button">Pilih Paket VPS</button>
+                <a href="/category/vps plan.html" class="service-button" target="_blank">Order VPS</a>
             </div>
             
-           <div class="service-card animate-on-scroll">
-                <svg class="service-icon" viewBox="0 0 24 24">
-                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
-                    <rect x="7" y="7" width="3" height="3" fill="currentColor"/>
-                    <rect x="14" y="7" width="3" height="3" fill="currentColor"/>
-                    <rect x="7" y="14" width="10" height="3" fill="currentColor"/>
-                </svg>
-                <h3>Minecraft Hosting Gratis</h3>
-                <p>Buat dunia Minecraft-mu sendiri dan mainkan bersama teman-teman tanpa biaya. Cocok untuk server survival kecil atau proyek pribadi.</p>
+            <div class="service-card animate-on-scroll">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M8 11h8v2H8v-2z"/>
+                        <path d="M8 7h8v2H8V7z"/>
+                        <path d="M8 15h8v2H8v-2z"/>
+                    </svg>
+                </div>
+                <h3>Free Trial Server</h3>
+                <p>Coba layanan premium kami tanpa biaya! Server Minecraft gratis untuk testing dan eksplorasi fitur-fitur canggih yang kami tawarkan.</p>
                 
                 <ul class="service-features">
-                    <li>CPU 2 Cores</li>
-                    <li>RAM 4GB</li>
-                    <li>Disk 5GB</li>
-                    <li>Akses Konsol</li>
-                    <li>Paper</li>
-                    <li>Subdomain Gratis</li>
+                    <li>CPU 2 Cores AMD EPYC</li>
+                    <li>RAM 4GB DDR4</li>
+                    <li>NVMe SSD 5GB</li>
+                    <li>Full Console Access</li>
+                    <li>Paper/Spigot Support</li>
+                    <li>Free Subdomain</li>
                 </ul>
                 
                 <div class="price-section">
-                    <span class="price">Rp 0K</span>
-                    <span class="price-period">/4 hari</span>
+                    <span class="price">FREE</span>
+                    <span class="price-period">/4 days trial</span>
                 </div>
                 
-                <button class="service-button">BUAT SERVER GRATIS</button>
+                <a href="https://panel.spacestore.dpdns.org" class="service-button" target="_blank">Claim Free Trial</a>
             </div>
         </div>
     </section>
@@ -760,66 +987,78 @@
     <section class="features" id="features">
         <div class="features-container">
             <div class="section-header animate-on-scroll">
-                <div class="section-badge">Keunggulan</div>
-                <h2 class="section-title">Mengapa Pilih EmpressStore?</h2>
-                <p class="section-description">Berbagai keunggulan yang membuat EmpressStore menjadi pilihan terbaik untuk hosting Minecraft dan layanan lainnya</p>
+                <div class="section-badge">Platform Advantages</div>
+                <h2 class="section-title">Why Choose SpaceStore?</h2>
+                <p class="section-description">Teknologi enterprise-grade dan fitur premium yang membuat SpaceStore menjadi pilihan utama para gamers profesional</p>
             </div>
             
             <div class="features-grid">
                 <div class="feature-item animate-on-scroll">
-                    <svg class="feature-icon" viewBox="0 0 24 24">
-                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor"/>
-                    </svg>
-                    <h4>Performa Lightning</h4>
-                    <p>Hardware premium dengan processor Intel Xeon terbaru dan RAM DDR4 untuk performa server yang optimal tanpa lag</p>
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                        </svg>
+                    </div>
+                    <h4>Ultra Performance</h4>
+                    <p>Hardware premium dengan processor Intel Xeon/AMD EPYC terbaru, RAM DDR4 ECC, dan NVMe SSD untuk performa gaming optimal zero-lag</p>
                 </div>
                 
                 <div class="feature-item animate-on-scroll">
-                    <svg class="feature-icon" viewBox="0 0 24 24">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="none" stroke="currentColor" stroke-width="2"/>
-                        <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2"/>
-                    </svg>
-                    <h4>Keamanan Tinggi</h4>
-                    <p>Proteksi DDoS advanced, firewall berlapis, dan monitoring 24/7 untuk menjaga server Anda tetap aman dari ancaman</p>
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h4>Military-Grade Security</h4>
+                    <p>Proteksi DDoS enterprise-level, firewall AI-powered, dan monitoring real-time 24/7 untuk menjaga server dari serangan cyber</p>
                 </div>
                 
                 <div class="feature-item animate-on-scroll">
-                    <svg class="feature-icon" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
-                        <polyline points="12,6 12,12 16,14" stroke="currentColor" stroke-width="2"/>
-                    </svg>
-                    <h4>Uptime 99.9%</h4>
-                    <p>Garansi uptime 99.9% dengan infrastruktur redundan dan monitoring real-time untuk memastikan server selalu online</p>
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <polyline points="12,6 12,12 16,14" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h4>99.9% SLA Guarantee</h4>
+                    <p>Infrastruktur redundan multi-datacenter dengan backup power dan jaringan ganda untuk memastikan uptime maksimal</p>
                 </div>
                 
                 <div class="feature-item animate-on-scroll">
-                    <svg class="feature-icon" viewBox="0 0 24 24">
-                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" fill="none" stroke="currentColor" stroke-width="2"/>
-                        <polyline points="3.27,6.96 12,12.01 20.73,6.96" stroke="currentColor" stroke-width="2"/>
-                        <line x1="12" y1="22.08" x2="12" y2="12" stroke="currentColor" stroke-width="2"/>
-                    </svg>
-                    <h4>Setup Instan</h4>
-                    <p>Server langsung aktif dalam hitungan menit setelah pembayaran dengan setup otomatis dan konfigurasi optimal</p>
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <polyline points="3.27,6.96 12,12.01 20.73,6.96" stroke="currentColor" stroke-width="2"/>
+                            <line x1="12" y1="22.08" x2="12" y2="12" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h4>Instant Deployment</h4>
+                    <p>Server aktif dalam 60 detik dengan sistem provisioning otomatis dan pre-configured templates untuk setup yang sempurna</p>
                 </div>
                 
                 <div class="feature-item animate-on-scroll">
-                    <svg class="feature-icon" viewBox="0 0 24 24">
-                        <path d="M14 9V5a3 3 0 0 0-6 0v4" fill="none" stroke="currentColor" stroke-width="2"/>
-                        <rect x="2" y="9" width="20" height="12" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
-                    </svg>
-                    <h4>Backup Otomatis</h4>
-                    <p>Sistem backup otomatis setiap 6 jam dengan penyimpanan hingga 30 hari untuk melindungi data server Anda</p>
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M14 9V5a3 3 0 0 0-6 0v4" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <rect x="2" y="9" width="20" height="12" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h4>Smart Auto Backup</h4>
+                    <p>Sistem backup otomatis setiap 4 jam dengan AI-powered compression dan penyimpanan cloud redundant hingga 30 hari</p>
                 </div>
                 
                 <div class="feature-item animate-on-scroll">
-                    <svg class="feature-icon" viewBox="0 0 24 24">
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" fill="none" stroke="currentColor" stroke-width="2"/>
-                        <circle cx="9" cy="7" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
-                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" fill="none" stroke="currentColor" stroke-width="2"/>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75" fill="none" stroke="currentColor" stroke-width="2"/>
-                    </svg>
-                    <h4>Support 24/7</h4>
-                    <p>Tim support yang berpengalaman siap membantu Anda 24/7 melalui Discord, WhatsApp, atau sistem ticket</p>
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="9" cy="7" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" fill="none" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h4>Expert Support 24/7</h4>
+                    <p>Tim expert developer dan system admin berpengalaman 10+ tahun siap membantu via Discord, WhatsApp, atau ticket system</p>
                 </div>
             </div>
         </div>
@@ -830,126 +1069,169 @@
         <div class="footer-content">
             <div class="footer-grid">
                 <div class="footer-section">
-                    <h4>EmpressStore</h4>
-                    <p>Penyedia hosting Minecraft server, Discord bot, dan VPS premium terpercaya dengan layanan berkualitas tinggi.</p>
-                    <p><strong>Support:</strong><br>
-                    Discord: EmpressStore#1234<br>
-                    WhatsApp: +62 812-3456-7890</p>
+                    <h4>🚀 SpaceStore</h4>
+                    <p>Platform hosting gaming premium dengan teknologi enterprise-grade untuk memberikan pengalaman gaming terbaik bagi komunitas Indonesia.</p>
+                    <br>
+                    <p><strong>💬 Connect With Us:</strong><br>
+                    Discord: <a href="https://discord.gg" target="_blank">discord.gg</a><br>
+                    WhatsApp: <a href="https://wa.me/6285242510587" target="_blank">+62 852-4251-0587</a><br>
+                    Email: <a href="mailto:support@spacestore.dpdns.org">support@spacestore.dpdns.org</a></p>
                 </div>
                 
                 <div class="footer-section">
-                    <h4>Layanan</h4>
-                    <a href="#services">Minecraft Hosting</a>
-                    <a href="#services">Discord Bot</a>
-                    <a href="#services">VPS Premium</a>
-                    <a href="#features">Fitur Lengkap</a>
+                    <h4>🎮 Gaming Services</h4>
+                    <a href="https://discord.gg" target="_blank">Minecraft Hosting Premium</a>
+                    <a href="https://discord.gg" target="_blank">Discord Bot Development</a>
+                    <a href="https://discord.gg" target="_blank">VPS Enterprise Solutions</a>
+                    <a href="https://discord.gg" target="_blank">Free Trial Server</a>
+                    <a href="https://discord.gg" target="_blank">Custom Solutions</a>
                 </div>
                 
                 <div class="footer-section">
-                    <h4>Support</h4>
-                    <a href="#">Knowledge Base</a>
-                    <a href="#">Setup Guide</a>
-                    <a href="#">Contact Support</a>
-                    <a href="#">Status Server</a>
+                    <h4>🛠️ Developer Resources</h4>
+                    <a href="https://docs.spacestore.dpdns.org" target="_blank">API Documentation</a>
+                    <a href="https://discord.gg" target="_blank">Setup Tutorials</a>
+                    <a href="https://discord.gg" target="_blank">Plugin Repository</a>
+                    <a href="https://status.spacestore.dpdns.org" target="_blank">Server Status</a>
+                    <a href="https://discord.gg" target="_blank">Knowledge Base</a>
                 </div>
                 
                 <div class="footer-section">
-                    <h4>Komunitas</h4>
-                    <a href="#">Discord Server</a>
-                    <a href="#">Forum Community</a>
-                    <a href="#">Tutorial YouTube</a>
-                    <a href="#">Instagram</a>
+                    <h4>🌟 Community Hub</h4>
+                    <a href="https://discord.gg/spacestore" target="_blank">Join Discord Server</a>
+                    <a href="https://youtube.com/@spacestore" target="_blank">YouTube Tutorials</a>
+                    <a href="https://instagram.com/spacestore.id" target="_blank">Instagram Updates</a>
+                    <a href="https://discord.gg/spacestore" target="_blank">Community Forums</a>
+                    <a href="https://discord.gg/spacestore" target="_blank">Success Stories</a>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2018 SpaceStore. All rights reserved. Built with ❤️ for gamers</p>
+                <p>&copy; 2024 SpaceStore Indonesia. All rights reserved. Built with 💚 for the gaming community | Powered by next-gen infrastructure</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
+        // Enhanced scroll effects
+        let ticking = false;
+        
+        function updateNavbar() {
             const navbar = document.getElementById('navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
+            const scrolled = window.scrollY > 50;
+            
+            if (scrolled) {
+                navbar.style.background = 'rgba(0, 0, 0, 0.8)';
+                navbar.style.backdropFilter = 'blur(30px)';
+                navbar.style.borderColor = 'rgba(255, 255, 255, 0.2)';
             } else {
-                navbar.classList.remove('scrolled');
+                navbar.style.background = 'rgba(255, 255, 255, 0.05)';
+                navbar.style.backdropFilter = 'blur(20px)';
+                navbar.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+            }
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                requestAnimationFrame(updateNavbar);
+                ticking = true;
             }
         });
 
-        // Smooth scrolling for navigation links
+        // Smooth scrolling with offset for fixed nav
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    const offsetTop = target.offsetTop - 100;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
                     });
                 }
             });
         });
 
-        // Animation on scroll
+        // Enhanced intersection observer with stagger effect
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
 
         const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
+            entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('animated');
+                    setTimeout(() => {
+                        entry.target.classList.add('animated');
+                    }, index * 100);
                 }
             });
         }, observerOptions);
 
-        // Observe all elements with animate-on-scroll class
         document.querySelectorAll('.animate-on-scroll').forEach(el => {
             observer.observe(el);
         });
 
-        // Counter animation for stats
-        function animateCounter(element, target) {
-            let count = 0;
-            const increment = target / 100;
-            const timer = setInterval(() => {
-                count += increment;
-                if (count >= target) {
-                    element.textContent = target.toString().includes('.') ? target + '%' : target + '+';
-                    clearInterval(timer);
+        // Enhanced counter animation with easing
+        function animateCounter(element, target, suffix = '') {
+            const duration = 2000;
+            const start = performance.now();
+            const isDecimal = target.toString().includes('.');
+            
+            function update(currentTime) {
+                const elapsed = currentTime - start;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Easing function
+                const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+                
+                const current = target * easeOutQuart;
+                
+                if (isDecimal) {
+                    element.textContent = current.toFixed(1) + suffix;
                 } else {
-                    element.textContent = Math.floor(count).toString() + (target.toString().includes('.') ? '%' : '+');
+                    element.textContent = Math.floor(current).toLocaleString() + suffix;
                 }
-            }, 20);
+                
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+            
+            requestAnimationFrame(update);
         }
 
-        // Animate stats when they come into view
+        // Stats animation with intersection observer
         const statsObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const statNumber = entry.target.querySelector('.stat-number');
                     const text = statNumber.textContent;
-                    let target;
+                    let target, suffix = '';
                     
                     if (text.includes('99.9')) {
                         target = 99.9;
+                        suffix = '%';
                     } else if (text.includes('1000')) {
                         target = 1000;
-                    } else if (text.includes('5000')) {
-                        target = 5000;
+                        suffix = '+';
+                    } else if (text.includes('10K')) {
+                        target = 10000;
+                        suffix = '+';
                     } else if (text.includes('24/7')) {
-                        statNumber.textContent = '24/7';
+                        // No animation needed for 24/7
                         return;
                     }
                     
                     if (target) {
-                        statNumber.textContent = '0';
-                        animateCounter(statNumber, target);
+                        statNumber.textContent = '0' + suffix;
+                        setTimeout(() => {
+                            animateCounter(statNumber, target, suffix);
+                        }, 200);
                     }
+                    
                     statsObserver.unobserve(entry.target);
                 }
             });
@@ -959,46 +1241,92 @@
             statsObserver.observe(stat);
         });
 
-        // Service button interactions
-        document.querySelectorAll('.service-button').forEach(button => {
-            button.addEventListener('click', function() {
-                const cardTitle = this.closest('.service-card').querySelector('h3').textContent;
-                alert(`Terima kasih! Anda akan dihubungi untuk paket ${cardTitle}. Silakan hubungi support kami di Discord atau WhatsApp.`);
+        // Enhanced particle system
+        class Particle {
+            constructor() {
+                this.x = Math.random() * window.innerWidth;
+                this.y = window.innerHeight + 50;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = (Math.random() - 0.5) * 2;
+                this.speedY = Math.random() * 3 + 1;
+                this.opacity = Math.random() * 0.5 + 0.3;
+                this.color = `hsl(${120 + Math.random() * 60}, 70%, 60%)`;
+                
+                this.element = document.createElement('div');
+                this.element.style.cssText = `
+                    position: fixed;
+                    width: ${this.size}px;
+                    height: ${this.size}px;
+                    background: ${this.color};
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: -1;
+                    opacity: ${this.opacity};
+                    box-shadow: 0 0 ${this.size * 2}px ${this.color};
+                `;
+                
+                document.body.appendChild(this.element);
+                this.animate();
+            }
+            
+            animate() {
+                const update = () => {
+                    this.y -= this.speedY;
+                    this.x += this.speedX;
+                    this.opacity *= 0.999;
+                    
+                    this.element.style.transform = `translate(${this.x}px, ${this.y}px)`;
+                    this.element.style.opacity = this.opacity;
+                    
+                    if (this.y < -50 || this.opacity < 0.01) {
+                        this.element.remove();
+                        return;
+                    }
+                    
+                    requestAnimationFrame(update);
+                };
+                update();
+            }
+        }
+
+        // Create particles periodically
+        setInterval(() => {
+            if (Math.random() < 0.7) {
+                new Particle();
+            }
+        }, 2000);
+
+        // Enhanced hover effects for cards
+        document.querySelectorAll('.service-card, .feature-item, .stat-item').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-12px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
             });
         });
 
-        // Add some particle effects (optional enhancement)
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.style.cssText = `
-                position: fixed;
-                width: 2px;
-                height: 2px;
-                background: var(--primary-green);
-                border-radius: 50%;
-                pointer-events: none;
-                z-index: -1;
-                opacity: 0.7;
-            `;
+        // Add loading animation
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
             
-            particle.style.left = Math.random() * window.innerWidth + 'px';
-            particle.style.top = '100vh';
-            
-            document.body.appendChild(particle);
-            
-            const duration = Math.random() * 3000 + 2000;
-            
-            particle.animate([
-                { transform: 'translateY(0) rotate(0deg)', opacity: 0.7 },
-                { transform: `translateY(-${window.innerHeight + 100}px) rotate(360deg)`, opacity: 0 }
-            ], {
-                duration: duration,
-                easing: 'linear'
-            }).onfinish = () => particle.remove();
-        }
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
 
-        // Create particles occasionally
-        setInterval(createParticle, 3000);
+        // Enhanced CTA button effects
+        document.querySelectorAll('.cta-primary, .service-button').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px) scale(1.05)';
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
     </script>
 </body>
 </html>
