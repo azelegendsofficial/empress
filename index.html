@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpaceStore - Premium Gaming Store</title>
+    <title>Space AI - Your Intelligent Assistant</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
@@ -39,7 +39,6 @@
             line-height: 1.6;
         }
 
-        /* Modern Animated Background */
         .animated-bg {
             position: fixed;
             top: 0;
@@ -103,7 +102,6 @@
             66% { transform: translateY(20px) rotate(240deg); }
         }
 
-        /* Navigation */
         nav {
             position: fixed;
             top: 20px;
@@ -195,7 +193,6 @@
             opacity: 1;
         }
 
-        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -274,7 +271,7 @@
             animation: fadeInUp 0.8s ease-out 0.6s both;
         }
 
-        .cta-primary, .cta-secondary {
+        .cta-primary {
             padding: 1.25rem 2.5rem;
             border-radius: 16px;
             font-weight: 600;
@@ -286,12 +283,11 @@
             font-size: 1rem;
             position: relative;
             overflow: hidden;
-        }
-
-        .cta-primary {
             background: var(--gradient-primary);
             color: white;
             box-shadow: 0 8px 32px rgba(59, 130, 246, 0.4);
+            border: none;
+            cursor: pointer;
         }
 
         .cta-primary:hover {
@@ -299,85 +295,7 @@
             box-shadow: 0 20px 40px rgba(59, 130, 246, 0.6);
         }
 
-        .cta-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(20px);
-        }
-
-        .cta-secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-
-        /* Stats Section */
-        .stats {
-            padding: 100px 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 3rem 2rem;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--gradient-primary);
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-
-        .stat-item:hover::before {
-            transform: scaleX(1);
-        }
-
-        .stat-item:hover {
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
-        }
-
-        .stat-number {
-            font-size: 3.5rem;
-            font-weight: 900;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: block;
-            margin-bottom: 0.5rem;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .stat-label {
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 500;
-            font-size: 1.1rem;
-        }
-
-        /* Services Section */
-        .services {
+        .features {
             padding: 120px 2rem;
             max-width: 1400px;
             margin: 0 auto;
@@ -416,300 +334,6 @@
             font-size: 1.25rem;
             color: rgba(255, 255, 255, 0.7);
             max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
-        }
-
-        .service-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 2.5rem;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient-primary);
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-
-        .service-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .service-card:hover {
-            transform: translateY(-12px);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 32px 64px rgba(59, 130, 246, 0.3);
-        }
-
-        .service-icon {
-            width: 64px;
-            height: 64px;
-            background: var(--gradient-primary);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 2rem;
-            box-shadow: 0 0 30px var(--glow-blue);
-        }
-
-        .service-icon svg {
-            width: 32px;
-            height: 32px;
-            fill: white;
-        }
-
-        .service-card h3 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .service-card p {
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 2rem;
-            line-height: 1.7;
-        }
-
-        .service-features {
-            list-style: none;
-            margin-bottom: 2.5rem;
-        }
-
-        .service-features li {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 0.75rem;
-            font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .service-features li::before {
-            content: '✓';
-            color: var(--light-blue);
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-
-        .price-section {
-            display: flex;
-            align-items: baseline;
-            gap: 0.75rem;
-            margin-bottom: 2rem;
-        }
-
-        .price {
-            font-size: 2.25rem;
-            font-weight: 800;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .price-period {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 1rem;
-        }
-
-        .service-button {
-            width: 100%;
-            background: var(--gradient-primary);
-            color: white;
-            border: none;
-            padding: 1.25rem;
-            border-radius: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-            text-decoration: none;
-            display: block;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3);
-        }
-
-        .service-button:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 16px 32px rgba(59, 130, 246, 0.5);
-        }
-
-        /* Other Products Section */
-        .other-products {
-            padding: 120px 2rem;
-            background: rgba(255, 255, 255, 0.02);
-            position: relative;
-        }
-
-        .other-products::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: var(--gradient-primary);
-            opacity: 0.3;
-        }
-
-        .other-products-container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .product-showcase {
-            display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 3rem;
-            align-items: center;
-            margin-top: 4rem;
-        }
-
-        .product-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 2rem;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .product-card::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
-            transition: all 0.4s ease;
-            transform: translate(-50%, -50%);
-            z-index: -1;
-        }
-
-        .product-card:hover::after {
-            width: 300px;
-            height: 300px;
-        }
-
-        .product-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(255, 255, 255, 0.2);
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
-        }
-
-        .product-icon {
-            width: 56px;
-            height: 56px;
-            background: var(--gradient-primary);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 0 20px var(--glow-blue);
-        }
-
-        .product-icon svg {
-            width: 28px;
-            height: 28px;
-            fill: white;
-        }
-
-        .product-card h4 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .product-card p {
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-        }
-
-        .product-price {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .view-more-section {
-            text-align: center;
-        }
-
-        .view-more-btn {
-            background: var(--gradient-primary);
-            color: white;
-            border: none;
-            padding: 1.5rem 3rem;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 1rem;
-            box-shadow: 0 8px 32px rgba(59, 130, 246, 0.4);
-        }
-
-        .view-more-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.6);
-        }
-
-        .view-more-icon {
-            width: 20px;
-            height: 20px;
-            transition: transform 0.3s ease;
-        }
-
-        .view-more-btn:hover .view-more-icon {
-            transform: translateX(5px);
-        }
-
-        /* Features Section */
-        .features {
-            padding: 120px 2rem;
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .features-container {
-            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -787,66 +411,208 @@
             line-height: 1.7;
         }
 
-        /* Footer */
-        footer {
-            background: var(--darker-blue);
-            padding: 5rem 2rem 2rem;
-            position: relative;
+        .comparison-section {
+            padding: 120px 2rem;
+            background: rgba(255, 255, 255, 0.02);
         }
 
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: var(--gradient-primary);
-            opacity: 0.3;
-        }
-
-        .footer-content {
-            max-width: 1400px;
+        .comparison-container {
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        .footer-grid {
+        .comparison-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
         }
 
-        .footer-section h4 {
+        .comparison-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 3rem;
+            transition: all 0.4s ease;
+        }
+
+        .comparison-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+        }
+
+        .comparison-card h3 {
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             color: white;
+        }
+
+        .ai-model {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .comparison-card ul {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .comparison-card li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .comparison-card li::before {
+            content: '✓';
+            color: var(--light-blue);
+            font-weight: bold;
             font-size: 1.2rem;
         }
 
-        .footer-section a, .footer-section p {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 0.75rem;
-            transition: all 0.3s ease;
-            line-height: 1.7;
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease;
         }
 
-        .footer-section a:hover {
-            color: var(--light-blue);
-            transform: translateX(5px);
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 2rem;
+        .modal-content {
+            background: var(--dark-blue);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 10% auto;
+            padding: 3rem;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 24px;
             text-align: center;
+            animation: slideUp 0.4s ease;
+            box-shadow: 0 32px 64px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close {
+            color: rgba(255, 255, 255, 0.6);
+            float: right;
+            font-size: 2rem;
+            font-weight: bold;
+            line-height: 1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close:hover {
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .modal-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2.5rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .modal-button {
+            padding: 1.25rem 2rem;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .modal-button-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 8px 32px rgba(59, 130, 246, 0.4);
+        }
+
+        .modal-button-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 16px 40px rgba(59, 130, 246, 0.6);
+        }
+
+        .modal-button-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+        }
+
+        .modal-button-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background: var(--darker-blue);
+            padding: 3rem 2rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-content p {
             color: rgba(255, 255, 255, 0.6);
             font-size: 0.95rem;
         }
 
-        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -869,18 +635,6 @@
             transform: translateY(0);
         }
 
-        /* Mobile Responsive */
-        @media (max-width: 1024px) {
-            .product-showcase {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
         @media (max-width: 768px) {
             nav {
                 top: 10px;
@@ -893,13 +647,12 @@
                 display: none;
             }
 
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
             .hero {
                 padding: 140px 1rem 60px;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -916,362 +669,187 @@
         <div class="orb"></div>
     </div>
 
-    <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
             <div class="logo">
-                <div class="logo-icon">🚀</div>
-                SpaceStore
+                <div class="logo-icon">🤖</div>
+                Space AI
             </div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#other-products">Products</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#features">Fitur</a></li>
+                <li><a href="#comparison">Perbandingan</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
             <div class="hero-badge">
-                Premium Gaming Store Experience
+                Powered by Google Gemini AI
             </div>
-            <h1>Next-Gen Gaming<br>Store</h1>
-            <p class="hero-subtitle">Toko gaming premium dengan teknologi terdepan, performa maksimal, dan layanan 24/7. Rasakan pengalaman berbelanja yang tak terlupakan.</p>
+            <h1>Space AI</h1>
+            <p class="hero-subtitle">Asisten AI cerdas yang memahami bahasa Indonesia dengan sempurna. Upload file, gambar, video dengan cepat dan dapatkan respons instan menggunakan teknologi Gemini terdepan.</p>
             <div class="cta-buttons">
-                <a href="https://discord.gg" class="cta-primary" target="_blank">
+                <button class="cta-primary" onclick="openModal()">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M13 3v6h8l-10 12V9H3l10-6z"/>
                     </svg>
-                    Mulai Berbelanja
-                </a>
-                <a href="#services" class="cta-secondary">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polygon points="23 7 16 12 23 17 23 7"></polygon>
-                        <polygon points="14 5 14 19 7 12 14 5"></polygon>
-                    </svg>
-                    Lihat Katalog
-                </a>
+                    Coba Space AI Sekarang
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="stats-grid">
-            <div class="stat-item animate-on-scroll">
-                <span class="stat-number">1000+</span>
-                <span class="stat-label">Produk Tersedia</span>
-            </div>
-            <div class="stat-item animate-on-scroll">
-                <span class="stat-number">99.9%</span>
-                <span class="stat-label">Kepuasan Pelanggan</span>
-            </div>
-            <div class="stat-item animate-on-scroll">
-                <span class="stat-number">24/7</span>
-                <span class="stat-label">Customer Support</span>
-            </div>
-            <div class="stat-item animate-on-scroll">
-                <span class="stat-number">10K+</span>
-                <span class="stat-label">Happy Customers</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="services" id="services">
+    <section class="features" id="features">
         <div class="section-header animate-on-scroll">
-            <div class="section-badge">Layanan Premium</div>
-            <h2 class="section-title">Gaming Solutions</h2>
-            <p class="section-description">Pilihan hosting dan layanan premium yang dirancang khusus untuk performa gaming terbaik dengan teknologi enterprise-grade</p>
+            <div class="section-badge">Fitur Unggulan</div>
+            <h2 class="section-title">Apa yang Bisa Space AI Lakukan?</h2>
+            <p class="section-description">Platform AI lengkap dengan berbagai fitur canggih untuk memudahkan pekerjaan dan kreativitas Anda</p>
         </div>
         
-        <div class="services-grid">
-            <div class="service-card animate-on-scroll">
-                <div class="service-icon">
+        <div class="features-grid">
+            <div class="feature-item animate-on-scroll">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <polyline points="17 8 12 3 7 8" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <line x1="12" y1="3" x2="12" y2="15" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h4>Upload File Cepat</h4>
+                <p>Upload berbagai jenis file dengan mudah dan cepat. Mendukung dokumen, gambar, video, dan berbagai format file lainnya tanpa batasan yang rumit.</p>
+            </div>
+            
+            <div class="feature-item animate-on-scroll">
+                <div class="feature-icon">
                     <svg viewBox="0 0 24 24">
                         <rect x="3" y="3" width="18" height="18" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
-                        <rect x="7" y="7" width="3" height="3"/>
-                        <rect x="14" y="7" width="3" height="3"/>
-                        <rect x="7" y="14" width="10" height="3"/>
+                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                        <polyline points="21,15 16,10 5,21" fill="none" stroke="currentColor" stroke-width="2"/>
                     </svg>
                 </div>
-                <h3>Minecraft Server</h3>
-                <p>Server Minecraft premium dengan performa tinggi, anti-lag teknologi terdepan, dan dukungan semua plugin populer. Cocok untuk komunitas gaming profesional.</p>
-                
-                <ul class="service-features">
-                    <li>RAM 4GB - 32GB DDR4</li>
-                    <li>CPU AMD EPYC 7003 Series</li>
-                    <li>NVMe SSD Storage</li>
-                    <li>Advanced DDoS Protection</li>
-                    <li>Full Plugin Support</li>
-                    <li>Real-time Auto Backup</li>
-                </ul>
-                
-                <div class="price-section">
-                    <span class="price">6K - 82K</span>
-                    <span class="price-period">/month</span>
-                </div>
-                
-                <a href="/category/minecraft plan.html" class="service-button" target="_blank">Order Minecraft Server</a>
-            </div>
-
-            <div class="service-card animate-on-scroll">
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/>
-                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-                    </svg>
-                </div>
-                <h3>Discord Bot Premium</h3>
-                <p>Bot Discord custom dengan hosting 24/7, maintenance gratis, dan fitur enterprise-grade untuk server Discord profesional Anda.</p>
-        
-                <ul class="service-features">
-                    <li>24/7 Premium Hosting</li>
-                    <li>Custom Commands & Features</li>
-                    <li>Database Integration</li>
-                    <li>Auto Updates & Patches</li>
-                    <li>Multi-Server Support</li>
-                    <li>Advanced Analytics Dashboard</li>
-                </ul>
-                
-                <div class="price-section">
-                    <span class="price">10K</span>
-                    <span class="price-period">/month</span>
-                </div>
-                
-                <a href="/category/discord bot plan.html" class="service-button" target="_blank">Order Discord Bot</a>
-            </div>
-
-            <div class="service-card animate-on-scroll">
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24">
-                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
-                        <line x1="8" y1="21" x2="16" y2="21" stroke="currentColor" stroke-width="2"/>
-                        <line x1="12" y1="17" x2="12" y2="21" stroke="currentColor" stroke-width="2"/>
-                        <rect x="6" y="7" width="4" height="2"/>
-                        <rect x="6" y="11" width="8" height="2"/>
-                    </svg>
-                </div>
-                <h3>VPS Enterprise</h3>
-                <p>Virtual Private Server dengan performa enterprise-grade, SSD NVMe storage, dan akses root penuh untuk kebutuhan development dan hosting skala besar.</p>
-                
-                <ul class="service-features">
-                    <li>CPU 4-16 Cores Intel Xeon</li>
-                    <li>RAM 8GB - 64GB DDR4</li>
-                    <li>NVMe SSD 200GB - 2TB</li>
-                    <li>Full Root Access</li>
-                    <li>Ubuntu/CentOS/Windows</li>
-                    <li>Free SSL & CDN</li>
-                </ul>
-                
-                <div class="price-section">
-                    <span class="price">150K</span>
-                    <span class="price-period">/month</span>
-                </div>
-                
-                <a href="/category/vps plan.html" class="service-button" target="_blank">Order VPS</a>
+                <h4>Analisis Gambar & Video</h4>
+                <p>AI dapat menganalisis gambar dan video yang Anda upload, memberikan deskripsi detail, menjawab pertanyaan, dan memberikan insight mendalam.</p>
             </div>
             
-            <div class="service-card animate-on-scroll">
-                <div class="service-icon">
+            <div class="feature-item animate-on-scroll">
+                <div class="feature-icon">
                     <svg viewBox="0 0 24 24">
-                        <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z" fill="none" stroke="currentColor" stroke-width="2"/>
-                        <path d="M8 11h8v2H8v-2z"/>
-                        <path d="M8 7h8v2H8V7z"/>
-                        <path d="M8 15h8v2H8v-2z"/>
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" fill="none" stroke="currentColor" stroke-width="2"/>
                     </svg>
                 </div>
-                <h3>Free Trial Server</h3>
-                <p>Coba layanan premium kami tanpa biaya! Server Minecraft gratis untuk testing dan eksplorasi fitur-fitur canggih yang kami tawarkan.</p>
-                
-                <ul class="service-features">
-                    <li>CPU 2 Cores AMD EPYC</li>
-                    <li>RAM 4GB DDR4</li>
-                    <li>NVMe SSD 5GB</li>
-                    <li>Full Console Access</li>
-                    <li>Paper/Spigot Support</li>
-                    <li>Free Subdomain</li>
-                </ul>
-                
-                <div class="price-section">
-                    <span class="price">FREE</span>
-                    <span class="price-period">/4 days trial</span>
+                <h4>Bahasa Indonesia</h4>
+                <p>Dirancang khusus untuk memahami dan merespons dalam Bahasa Indonesia dengan akurat. Komunikasi natural tanpa hambatan bahasa.</p>
+            </div>
+            
+            <div class="feature-item animate-on-scroll">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="23 4 23 10 17 10" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" fill="none" stroke="currentColor" stroke-width="2"/>
+                    </svg>
                 </div>
-                
-                <a href="https://panel.spacestore.dpdns.org" class="service-button" target="_blank">Claim Free Trial</a>
+                <h4>Auto Retry</h4>
+                <p>Sistem otomatis mencoba ulang jika terjadi error atau gangguan. Memastikan setiap permintaan Anda diproses dengan sempurna.</p>
+            </div>
+            
+            <div class="feature-item animate-on-scroll">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="currentColor"/>
+                    </svg>
+                </div>
+                <h4>Respons Cepat</h4>
+                <p>Teknologi Gemini AI memberikan respons instan dengan kualitas tinggi. Tidak perlu menunggu lama untuk mendapat jawaban.</p>
+            </div>
+            
+            <div class="feature-item animate-on-scroll">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" fill="none" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h4>Multi-Format Support</h4>
+                <p>Mendukung berbagai format file termasuk PDF, Word, Excel, PowerPoint, gambar, video, audio, dan banyak lagi.</p>
             </div>
         </div>
     </section>
 
-    <!-- Other Products Section -->
-    <section class="other-products" id="other-products">
-        <div class="other-products-container">
+    <section class="comparison-section" id="comparison">
+        <div class="comparison-container">
             <div class="section-header animate-on-scroll">
-                <div class="section-badge">Produk Lainnya</div>
-                <h2 class="section-title">More Gaming Products</h2>
-                <p class="section-description">Jelajahi koleksi produk gaming premium lainnya yang dirancang untuk meningkatkan pengalaman bermain Anda</p>
+                <div class="section-badge">Pilih Platform</div>
+                <h2 class="section-title">Website vs WhatsApp</h2>
+                <p class="section-description">Pilih platform yang sesuai dengan kebutuhan Anda. Kedua platform memiliki fitur lengkap dengan model AI yang berbeda.</p>
             </div>
             
-            <div class="product-showcase">
-                <div class="product-card animate-on-scroll">
-                    <div class="product-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                        </svg>
-                    </div>
-                    <h4>Minecraft Bedrock Edition</h4>
-                    <p>Khusus untuk perangkat Android! Nikmati Minecraft Pocket Edition dengan fitur lengkap, multiplayer support, dan update terbaru. Perfect untuk gaming mobile.</p>
-                    <div class="product-price">12K</div>
+            <div class="comparison-grid">
+                <div class="comparison-card animate-on-scroll">
+                    <h3>🌐 Space AI Website</h3>
+                    <span class="ai-model">Gemini 2.5 Pro</span>
+                    <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 1.5rem;">Model AI paling canggih dengan kemampuan analisis mendalam dan pemahaman konteks superior untuk hasil terbaik.</p>
+                    <ul>
+                        <li>Upload file, gambar, video</li>
+                        <li>Upload cepat tanpa batasan</li>
+                        <li>Bahasa Indonesia native</li>
+                        <li>Auto retry system</li>
+                        <li>Interface web modern</li>
+                        <li>Analisis mendalam & detail</li>
+                        <li>Respons berkualitas tinggi</li>
+                    </ul>
                 </div>
-                
-                <div class="view-more-section animate-on-scroll">
-                    <a href="/category/product lainnya.html" class="view-more-btn">
-                        Lihat Selengkapnya
-                        <svg class="view-more-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12,5 19,12 12,19"></polyline>
-                        </svg>
-                    </a>
+
+                <div class="comparison-card animate-on-scroll">
+                    <h3>💬 Space AI WhatsApp</h3>
+                    <span class="ai-model">Gemini 2.5 Flash</span>
+                    <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 1.5rem;">Model AI yang dioptimalkan untuk kecepatan respons maksimal, cocok untuk kebutuhan sehari-hari yang praktis.</p>
+                    <ul>
+                        <li>Upload file, gambar, video</li>
+                        <li>Upload cepat via WhatsApp</li>
+                        <li>Bahasa Indonesia native</li>
+                        <li>Auto retry system</li>
+                        <li>Akses dari mana saja</li>
+                        <li>Respons super cepat</li>
+                        <li>Integrasi WhatsApp</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="features-container">
-            <div class="section-header animate-on-scroll">
-                <div class="section-badge">Platform Advantages</div>
-                <h2 class="section-title">Why Choose SpaceStore?</h2>
-                <p class="section-description">Teknologi enterprise-grade dan fitur premium yang membuat SpaceStore menjadi pilihan utama para gamers profesional</p>
-            </div>
-            
-            <div class="features-grid">
-                <div class="feature-item animate-on-scroll">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24">
-                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-                        </svg>
-                    </div>
-                    <h4>Ultra Performance</h4>
-                    <p>Hardware premium dengan processor Intel Xeon/AMD EPYC terbaru, RAM DDR4 ECC, dan NVMe SSD untuk performa gaming optimal zero-lag</p>
-                </div>
-                
-                <div class="feature-item animate-on-scroll">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="none" stroke="currentColor" stroke-width="2"/>
-                            <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <h4>Military-Grade Security</h4>
-                    <p>Proteksi DDoS enterprise-level, firewall AI-powered, dan monitoring real-time 24/7 untuk menjaga server dari serangan cyber</p>
-                </div>
-                
-                <div class="feature-item animate-on-scroll">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
-                            <polyline points="12,6 12,12 16,14" stroke="currentColor" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <h4>99.9% SLA Guarantee</h4>
-                    <p>Infrastruktur redundan multi-datacenter dengan backup power dan jaringan ganda untuk memastikan uptime maksimal</p>
-                </div>
-                
-                <div class="feature-item animate-on-scroll">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" fill="none" stroke="currentColor" stroke-width="2"/>
-                            <polyline points="3.27,6.96 12,12.01 20.73,6.96" stroke="currentColor" stroke-width="2"/>
-                            <line x1="12" y1="22.08" x2="12" y2="12" stroke="currentColor" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <h4>Instant Deployment</h4>
-                    <p>Server aktif dalam 60 detik dengan sistem provisioning otomatis dan pre-configured templates untuk setup yang sempurna</p>
-                </div>
-                
-                <div class="feature-item animate-on-scroll">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M14 9V5a3 3 0 0 0-6 0v4" fill="none" stroke="currentColor" stroke-width="2"/>
-                            <rect x="2" y="9" width="20" height="12" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <h4>Smart Auto Backup</h4>
-                    <p>Sistem backup otomatis setiap 4 jam dengan AI-powered compression dan penyimpanan cloud redundant hingga 30 hari</p>
-                </div>
-                
-                <div class="feature-item animate-on-scroll">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" fill="none" stroke="currentColor" stroke-width="2"/>
-                            <circle cx="9" cy="7" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87" fill="none" stroke="currentColor" stroke-width="2"/>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75" fill="none" stroke="currentColor" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <h4>Expert Support 24/7</h4>
-                    <p>Tim expert developer dan system admin berpengalaman 10+ tahun siap membantu via Discord, WhatsApp, atau ticket system</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact">
+    <footer>
         <div class="footer-content">
-            <div class="footer-grid">
-                <div class="footer-section">
-                    <h4>🚀 SpaceStore</h4>
-                    <p>Platform gaming store premium dengan teknologi enterprise-grade untuk memberikan pengalaman berbelanja terbaik bagi komunitas gaming Indonesia.</p>
-                    <br>
-                    <p><strong>💬 Connect With Us:</strong><br>
-                    Discord: <a href="https://discord.gg" target="_blank">discord.gg</a><br>
-                    WhatsApp: <a href="https://wa.me/6285242510587" target="_blank">+62 852-4251-0587</a><br>
-                    Email: <a href="mailto:support@spacestore.dpdns.org">support@spacestore.dpdns.org</a></p>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>🎮 Gaming Services</h4>
-                    <a href="https://discord.gg" target="_blank">Minecraft Hosting Premium</a>
-                    <a href="https://discord.gg" target="_blank">Discord Bot Development</a>
-                    <a href="https://discord.gg" target="_blank">VPS Enterprise Solutions</a>
-                    <a href="https://discord.gg" target="_blank">Free Trial Server</a>
-                    <a href="/category/product lainnya.html" target="_blank">Produk Lainnya</a>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>🛠️ Developer Resources</h4>
-                    <a href="https://docs.spacestore.dpdns.org" target="_blank">API Documentation</a>
-                    <a href="https://discord.gg" target="_blank">Setup Tutorials</a>
-                    <a href="https://discord.gg" target="_blank">Plugin Repository</a>
-                    <a href="https://status.spacestore.dpdns.org" target="_blank">Server Status</a>
-                    <a href="https://discord.gg" target="_blank">Knowledge Base</a>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>🌟 Community Hub</h4>
-                    <a href="https://discord.gg/spacestore" target="_blank">Join Discord Server</a>
-                    <a href="https://youtube.com/@spacestore" target="_blank">YouTube Tutorials</a>
-                    <a href="https://instagram.com/spacestore.id" target="_blank">Instagram Updates</a>
-                    <a href="https://discord.gg/spacestore" target="_blank">Community Forums</a>
-                    <a href="https://discord.gg/spacestore" target="_blank">Success Stories</a>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2024 SpaceStore Indonesia. All rights reserved. Built with 💚 for the gaming community | Powered by next-gen infrastructure</p>
-            </div>
+            <p>&copy; 2024 Space AI Indonesia. All rights reserved. Powered by Google Gemini AI</p>
         </div>
     </footer>
 
+    <div id="accessModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 class="modal-title">Pilih Platform</h2>
+            <p class="modal-description">Pilih platform yang Anda inginkan untuk mengakses Space AI</p>
+            <div class="modal-buttons">
+                <a href="https://ai.spacestore.dpdns.org" target="_blank" class="modal-button modal-button-primary" onclick="closeModal()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                    </svg>
+                    Website (Gemini 2.5 Pro)
+                </a>
+                <a href="https://wa.me/6289540291010?text=Halo%20Space%20AI!%20Saya%20ingin%20mencoba%20fitur%20AI%20assistant%20Anda." target="_blank" class="modal-button modal-button-secondary" onclick="closeModal()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                    WhatsApp (Gemini 2.5 Flash)
+                </a>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Enhanced scroll effects with smoother transitions
         let ticking = false;
         
         function updateNavbar() {
@@ -1299,7 +877,6 @@
             }
         });
 
-        // Smooth scrolling with offset for fixed nav
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1314,7 +891,6 @@
             });
         });
 
-        // Enhanced intersection observer with stagger effect
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -1334,73 +910,30 @@
             observer.observe(el);
         });
 
-        // Enhanced counter animation
-        function animateCounter(element, target, suffix = '') {
-            const duration = 2500;
-            const start = performance.now();
-            const isDecimal = target.toString().includes('.');
-            
-            function update(currentTime) {
-                const elapsed = currentTime - start;
-                const progress = Math.min(elapsed / duration, 1);
-                
-                // Smooth easing function
-                const easeOutCubic = 1 - Math.pow(1 - progress, 3);
-                const current = target * easeOutCubic;
-                
-                if (isDecimal) {
-                    element.textContent = current.toFixed(1) + suffix;
-                } else {
-                    element.textContent = Math.floor(current).toLocaleString() + suffix;
-                }
-                
-                if (progress < 1) {
-                    requestAnimationFrame(update);
-                }
-            }
-            
-            requestAnimationFrame(update);
+        function openModal() {
+            document.getElementById('accessModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
         }
 
-        // Stats animation with intersection observer
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const statNumber = entry.target.querySelector('.stat-number');
-                    const text = statNumber.textContent;
-                    let target, suffix = '';
-                    
-                    if (text.includes('99.9')) {
-                        target = 99.9;
-                        suffix = '%';
-                    } else if (text.includes('1000')) {
-                        target = 1000;
-                        suffix = '+';
-                    } else if (text.includes('10K')) {
-                        target = 10000;
-                        suffix = '+';
-                    } else if (text.includes('24/7')) {
-                        return;
-                    }
-                    
-                    if (target) {
-                        statNumber.textContent = '0' + suffix;
-                        setTimeout(() => {
-                            animateCounter(statNumber, target, suffix);
-                        }, 300);
-                    }
-                    
-                    statsObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
+        function closeModal() {
+            document.getElementById('accessModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
 
-        document.querySelectorAll('.stat-item').forEach(stat => {
-            statsObserver.observe(stat);
+        window.onclick = function(event) {
+            const modal = document.getElementById('accessModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
         });
 
-        // Enhanced hover effects for interactive elements
-        document.querySelectorAll('.service-card, .feature-item, .stat-item, .product-card').forEach(card => {
+        document.querySelectorAll('.feature-item, .comparison-card').forEach(card => {
             card.addEventListener('mouseenter', function() {
                 this.style.transform = 'translateY(-12px) scale(1.02)';
             });
@@ -1410,18 +943,6 @@
             });
         });
 
-        // Enhanced button interactions
-        document.querySelectorAll('.cta-primary, .service-button, .view-more-btn').forEach(button => {
-            button.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-3px) scale(1.05)';
-            });
-            
-            button.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-
-        // Smooth page loading animation
         window.addEventListener('load', function() {
             document.body.style.opacity = '0';
             document.body.style.transition = 'opacity 0.8s ease';
@@ -1431,7 +952,6 @@
             }, 100);
         });
 
-        // Dynamic particle system for enhanced visual effects
         class FloatingParticle {
             constructor() {
                 this.x = Math.random() * window.innerWidth;
@@ -1481,14 +1001,12 @@
             }
         }
 
-        // Create particles periodically
         setInterval(() => {
             if (Math.random() < 0.3) {
                 new FloatingParticle();
             }
         }, 3000);
 
-        // Enhanced mobile menu toggle
         const createMobileMenu = () => {
             const nav = document.querySelector('nav');
             const navLinks = document.querySelector('.nav-links');
@@ -1531,61 +1049,6 @@
 
         window.addEventListener('resize', createMobileMenu);
         createMobileMenu();
-
-        // Performance optimization: Reduce animations on low-end devices
-        const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-        
-        if (reduceMotionQuery.matches) {
-            document.documentElement.style.setProperty('--animation-duration', '0.1s');
-            document.querySelectorAll('.orb').forEach(orb => {
-                orb.style.animation = 'none';
-            });
-        }
-
-        // Add loading screen
-        const loadingScreen = document.createElement('div');
-        loadingScreen.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--dark-blue);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
-        `;
-        
-        loadingScreen.innerHTML = `
-            <div style="text-align: center;">
-                <div style="width: 50px; height: 50px; border: 3px solid rgba(59, 130, 246, 0.3); border-top: 3px solid #3b82f6; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 1rem;"></div>
-                <p style="color: white; font-size: 1.1rem; font-weight: 600;">Loading SpaceStore...</p>
-            </div>
-        `;
-        
-        document.body.appendChild(loadingScreen);
-        
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                loadingScreen.style.opacity = '0';
-                setTimeout(() => {
-                    loadingScreen.remove();
-                }, 500);
-            }, 1500);
-        });
-
-        // Add CSS for loading animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-            }
-        `;
-        document.head.appendChild(style);
-
     </script>
 </body>
 </html>
