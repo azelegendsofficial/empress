@@ -3,26 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Space AI - Your Intelligent Assistant</title>
+    <title>Space Store - Premium VM & RDP Hosting</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
         
         :root {
-            --primary-blue: #1e3a8a;
-            --light-blue: #3b82f6;
-            --accent-blue: #60a5fa;
-            --dark-blue: #0f172a;
-            --darker-blue: #020617;
+            --primary-purple: #7c3aed;
+            --light-purple: #a78bfa;
+            --accent-purple: #c4b5fd;
+            --dark-bg: #0f0f23;
+            --darker-bg: #050510;
             --pure-white: #ffffff;
-            --off-white: #f8fafc;
-            --text-dark: #1e293b;
-            --text-light: #64748b;
-            --glow-blue: rgba(59, 130, 246, 0.5);
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            --gradient-primary: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+            --text-light: #94a3b8;
+            --glow-purple: rgba(124, 58, 237, 0.6);
+            --gradient-primary: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
+            --gradient-accent: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
         }
 
         * {
@@ -33,7 +29,7 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--dark-blue);
+            background: var(--dark-bg);
             color: var(--pure-white);
             overflow-x: hidden;
             line-height: 1.6;
@@ -47,10 +43,25 @@
             height: 100%;
             z-index: -2;
             background: 
-                radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(30, 58, 138, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 40% 60%, rgba(96, 165, 250, 0.08) 0%, transparent 50%),
-                linear-gradient(135deg, var(--dark-blue) 0%, var(--darker-blue) 100%);
+                radial-gradient(circle at 20% 20%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(167, 139, 250, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(236, 72, 153, 0.08) 0%, transparent 50%),
+                linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
+        }
+
+        .grid-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.03;
+            background-image: 
+                linear-gradient(rgba(124, 58, 237, 0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(124, 58, 237, 0.3) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
         }
 
         .floating-orbs {
@@ -67,39 +78,40 @@
             position: absolute;
             border-radius: 50%;
             background: var(--gradient-primary);
-            filter: blur(40px);
-            animation: float 15s infinite ease-in-out;
-            opacity: 0.6;
+            filter: blur(60px);
+            animation: float 20s infinite ease-in-out;
+            opacity: 0.4;
         }
 
         .orb:nth-child(1) {
-            width: 300px;
-            height: 300px;
-            top: 20%;
-            left: 10%;
+            width: 400px;
+            height: 400px;
+            top: 10%;
+            left: 5%;
             animation-delay: 0s;
         }
 
         .orb:nth-child(2) {
-            width: 200px;
-            height: 200px;
-            top: 60%;
-            right: 15%;
-            animation-delay: -5s;
+            width: 300px;
+            height: 300px;
+            top: 50%;
+            right: 10%;
+            animation-delay: -7s;
+            background: var(--gradient-accent);
         }
 
         .orb:nth-child(3) {
-            width: 150px;
-            height: 150px;
-            top: 80%;
-            left: 60%;
-            animation-delay: -10s;
+            width: 250px;
+            height: 250px;
+            top: 70%;
+            left: 50%;
+            animation-delay: -14s;
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            33% { transform: translateY(-30px) rotate(120deg); }
-            66% { transform: translateY(20px) rotate(240deg); }
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -40px) rotate(120deg); }
+            66% { transform: translate(-20px, 30px) rotate(240deg); }
         }
 
         nav {
@@ -107,19 +119,20 @@
             top: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(15, 15, 35, 0.95);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(124, 58, 237, 0.3);
             border-radius: 20px;
             z-index: 1000;
             padding: 1rem 2rem;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(124, 58, 237, 0.2);
         }
 
         nav:hover {
             transform: translateX(-50%) translateY(-2px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 20px 40px rgba(124, 58, 237, 0.3);
+            border-color: rgba(124, 58, 237, 0.5);
         }
 
         .nav-container {
@@ -136,24 +149,24 @@
             font-family: 'JetBrains Mono', monospace;
             font-size: 1.25rem;
             font-weight: 700;
-            color: var(--primary-blue);
+            color: var(--pure-white);
         }
 
         .logo-icon {
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             background: var(--gradient-primary);
-            border-radius: 8px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             animation: logoGlow 3s ease-in-out infinite;
-            box-shadow: 0 0 20px var(--glow-blue);
+            box-shadow: 0 0 20px var(--glow-purple);
         }
 
         @keyframes logoGlow {
-            0%, 100% { box-shadow: 0 0 20px var(--glow-blue); }
-            50% { box-shadow: 0 0 30px var(--glow-blue), 0 0 40px rgba(59, 130, 246, 0.3); }
+            0%, 100% { box-shadow: 0 0 20px var(--glow-purple); }
+            50% { box-shadow: 0 0 30px var(--glow-purple), 0 0 40px rgba(124, 58, 237, 0.4); }
         }
 
         .nav-links {
@@ -163,7 +176,7 @@
         }
 
         .nav-links a {
-            color: var(--text-dark);
+            color: var(--text-light);
             text-decoration: none;
             font-weight: 500;
             font-size: 0.9rem;
@@ -204,7 +217,7 @@
 
         .hero-content {
             text-align: center;
-            max-width: 1000px;
+            max-width: 1100px;
             z-index: 2;
         }
 
@@ -212,26 +225,26 @@
             display: inline-flex;
             align-items: center;
             gap: 0.75rem;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(124, 58, 237, 0.15);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(124, 58, 237, 0.3);
             padding: 0.75rem 1.5rem;
             border-radius: 50px;
             font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 2rem;
             animation: fadeInUp 0.8s ease-out;
-            box-shadow: 0 8px 32px rgba(59, 130, 246, 0.2);
+            box-shadow: 0 8px 32px rgba(124, 58, 237, 0.2);
         }
 
         .hero-badge::before {
             content: '';
             width: 8px;
             height: 8px;
-            background: var(--light-blue);
+            background: var(--light-purple);
             border-radius: 50%;
             animation: pulse 2s ease-in-out infinite;
-            box-shadow: 0 0 10px var(--light-blue);
+            box-shadow: 0 0 10px var(--light-purple);
         }
 
         @keyframes pulse {
@@ -243,21 +256,20 @@
             font-size: clamp(3.5rem, 8vw, 7rem);
             font-weight: 900;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--pure-white) 0%, var(--accent-blue) 100%);
+            background: linear-gradient(135deg, var(--pure-white) 0%, var(--accent-purple) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             line-height: 1.1;
             animation: fadeInUp 0.8s ease-out 0.2s both;
             letter-spacing: -0.02em;
-            text-shadow: 0 0 40px rgba(96, 165, 250, 0.3);
         }
 
         .hero-subtitle {
             font-size: 1.5rem;
             color: rgba(255, 255, 255, 0.8);
             margin-bottom: 3rem;
-            max-width: 700px;
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
             animation: fadeInUp 0.8s ease-out 0.4s both;
@@ -285,17 +297,17 @@
             overflow: hidden;
             background: var(--gradient-primary);
             color: white;
-            box-shadow: 0 8px 32px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 8px 32px rgba(124, 58, 237, 0.4);
             border: none;
             cursor: pointer;
         }
 
         .cta-primary:hover {
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.6);
+            box-shadow: 0 20px 40px rgba(124, 58, 237, 0.6);
         }
 
-        .features {
+        .products-section {
             padding: 120px 2rem;
             max-width: 1400px;
             margin: 0 auto;
@@ -308,14 +320,14 @@
 
         .section-badge {
             display: inline-block;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(124, 58, 237, 0.15);
             color: white;
             padding: 0.75rem 1.5rem;
             border-radius: 50px;
             font-size: 0.9rem;
             font-weight: 600;
             margin-bottom: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(124, 58, 237, 0.3);
             backdrop-filter: blur(20px);
         }
 
@@ -323,7 +335,7 @@
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 800;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--pure-white) 0%, var(--accent-blue) 100%);
+            background: linear-gradient(135deg, var(--pure-white) 0%, var(--accent-purple) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -337,230 +349,113 @@
             margin: 0 auto;
         }
 
-        .features-grid {
+        .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
             margin-top: 4rem;
         }
 
-        .feature-item {
-            background: rgba(255, 255, 255, 0.05);
+        .product-card {
+            background: rgba(15, 15, 35, 0.8);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(124, 58, 237, 0.2);
             padding: 2.5rem;
-            border-radius: 20px;
-            text-align: center;
+            border-radius: 24px;
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .feature-item::after {
+        .product-card::before {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
-            transition: all 0.4s ease;
-            transform: translate(-50%, -50%);
-            z-index: -1;
-        }
-
-        .feature-item:hover::after {
-            width: 200px;
-            height: 200px;
-        }
-
-        .feature-item:hover {
-            transform: translateY(-8px);
-            border-color: rgba(255, 255, 255, 0.2);
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
-        }
-
-        .feature-icon {
-            width: 56px;
-            height: 56px;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
             background: var(--gradient-primary);
-            border-radius: 14px;
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(124, 58, 237, 0.5);
+            box-shadow: 0 20px 40px rgba(124, 58, 237, 0.3);
+        }
+
+        .product-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--gradient-primary);
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1.5rem;
-            box-shadow: 0 0 20px var(--glow-blue);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 30px var(--glow-purple);
         }
 
-        .feature-icon svg {
-            width: 28px;
-            height: 28px;
-            fill: white;
+        .product-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke: white;
         }
 
-        .feature-item h4 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .feature-item p {
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.7;
-        }
-
-        .comparison-section {
-            padding: 120px 2rem;
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .comparison-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
-        }
-
-        .comparison-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 3rem;
-            transition: all 0.4s ease;
-        }
-
-        .comparison-card:hover {
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
-        }
-
-        .comparison-card h3 {
-            font-size: 2rem;
+        .product-card h3 {
+            font-size: 1.75rem;
             font-weight: 700;
             margin-bottom: 1rem;
             color: white;
         }
 
-        .ai-model {
-            display: inline-block;
-            background: var(--gradient-primary);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-
-        .comparison-card ul {
+        .product-specs {
             list-style: none;
-            margin-top: 1.5rem;
+            margin: 1.5rem 0;
         }
 
-        .comparison-card li {
+        .product-specs li {
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            margin-bottom: 1rem;
-            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
             color: rgba(255, 255, 255, 0.8);
         }
 
-        .comparison-card li::before {
-            content: '✓';
-            color: var(--light-blue);
-            font-weight: bold;
-            font-size: 1.2rem;
+        .product-specs li svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--light-purple);
+            flex-shrink: 0;
         }
 
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            animation: fadeIn 0.3s ease;
+        .price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            margin: 1.5rem 0;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .modal-content {
-            background: var(--dark-blue);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            margin: 10% auto;
-            padding: 3rem;
-            width: 90%;
-            max-width: 500px;
-            border-radius: 24px;
-            text-align: center;
-            animation: slideUp 0.4s ease;
-            box-shadow: 0 32px 64px rgba(0, 0, 0, 0.5);
-        }
-
-        @keyframes slideUp {
-            from { 
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to { 
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .close {
+        .price-period {
+            font-size: 1rem;
+            font-weight: 500;
             color: rgba(255, 255, 255, 0.6);
-            float: right;
-            font-size: 2rem;
-            font-weight: bold;
-            line-height: 1;
-            cursor: pointer;
-            transition: all 0.3s ease;
         }
 
-        .close:hover {
-            color: white;
-            transform: rotate(90deg);
-        }
-
-        .modal-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .modal-description {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 2.5rem;
-        }
-
-        .modal-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .modal-button {
+        .order-btn {
+            width: 100%;
             padding: 1.25rem 2rem;
-            border-radius: 16px;
+            border-radius: 14px;
             font-weight: 600;
             font-size: 1rem;
             cursor: pointer;
@@ -571,41 +466,73 @@
             justify-content: center;
             gap: 0.75rem;
             text-decoration: none;
-        }
-
-        .modal-button-primary {
             background: var(--gradient-primary);
             color: white;
-            box-shadow: 0 8px 32px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.3);
+            position: relative;
+            overflow: hidden;
         }
 
-        .modal-button-primary:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 16px 40px rgba(59, 130, 246, 0.6);
-        }
-
-        .modal-button-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(20px);
-        }
-
-        .modal-button-secondary:hover {
-            background: rgba(255, 255, 255, 0.15);
+        .order-btn:hover {
             transform: translateY(-2px);
+            box-shadow: 0 16px 32px rgba(124, 58, 237, 0.5);
+        }
+
+        .order-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .rdp-section {
+            padding: 80px 2rem 120px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .os-selector {
+            background: rgba(124, 58, 237, 0.1);
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .os-selector select {
+            background: rgba(15, 15, 35, 0.9);
+            color: white;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+        }
+
+        .os-selector select:focus {
+            outline: none;
+            border-color: var(--light-purple);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+        }
+
+        .os-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            font-weight: 500;
         }
 
         footer {
-            background: var(--darker-blue);
+            background: var(--darker-bg);
             padding: 3rem 2rem 2rem;
             text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .footer-content {
-            max-width: 800px;
-            margin: 0 auto;
+            border-top: 1px solid rgba(124, 58, 237, 0.2);
         }
 
         .footer-content p {
@@ -641,6 +568,7 @@
                 left: 10px;
                 right: 10px;
                 transform: none;
+                padding: 1rem 1.5rem;
             }
 
             .nav-links {
@@ -651,8 +579,16 @@
                 padding: 140px 1rem 60px;
             }
 
-            .comparison-grid {
+            .products-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
             }
         }
 
@@ -663,6 +599,7 @@
 </head>
 <body>
     <div class="animated-bg"></div>
+    <div class="grid-pattern"></div>
     <div class="floating-orbs">
         <div class="orb"></div>
         <div class="orb"></div>
@@ -672,13 +609,19 @@
     <nav id="navbar">
         <div class="nav-container">
             <div class="logo">
-                <div class="logo-icon">🤖</div>
-                Space AI
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                Space Store
             </div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#features">Fitur</a></li>
-                <li><a href="#comparison">Perbandingan</a></li>
+                <li><a href="#vm">Virtual Machine</a></li>
+                <li><a href="#rdp">RDP Server</a></li>
             </ul>
         </div>
     </nav>
@@ -686,170 +629,145 @@
     <section class="hero" id="home">
         <div class="hero-content">
             <div class="hero-badge">
-                Powered by Google Gemini AI
+                Premium Cloud Hosting Solutions
             </div>
-            <h1>Space AI</h1>
-            <p class="hero-subtitle">Asisten AI cerdas yang memahami bahasa Indonesia dengan sempurna. Upload file, gambar, video dengan cepat dan dapatkan respons instan menggunakan teknologi Gemini terdepan.</p>
+            <h1>Space Store</h1>
+            <p class="hero-subtitle">Solusi hosting premium dengan performa tinggi. Virtual Machine dan RDP Server dengan processor AMD EPYC 7571 di region Singapore untuk kecepatan maksimal.</p>
             <div class="cta-buttons">
-                <button class="cta-primary" onclick="openModal()">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M13 3v6h8l-10 12V9H3l10-6z"/>
+                <a href="#vm" class="cta-primary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
                     </svg>
-                    Coba Space AI Sekarang
-                </button>
+                    Lihat Produk
+                </a>
             </div>
         </div>
     </section>
 
-    <section class="features" id="features">
+    <section class="products-section" id="vm">
         <div class="section-header animate-on-scroll">
-            <div class="section-badge">Fitur Unggulan</div>
-            <h2 class="section-title">Apa yang Bisa Space AI Lakukan?</h2>
-            <p class="section-description">Platform AI lengkap dengan berbagai fitur canggih untuk memudahkan pekerjaan dan kreativitas Anda</p>
+            <div class="section-badge">Virtual Machine</div>
+            <h2 class="section-title">VM Premium Singapore</h2>
+            <p class="section-description">Virtual Machine dengan processor AMD EPYC 7571 dan koneksi super cepat di region Singapore</p>
         </div>
         
-        <div class="features-grid">
-            <div class="feature-item animate-on-scroll">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" fill="none" stroke="currentColor" stroke-width="2"/>
-                        <polyline points="17 8 12 3 7 8" fill="none" stroke="currentColor" stroke-width="2"/>
-                        <line x1="12" y1="3" x2="12" y2="15" stroke="currentColor" stroke-width="2"/>
+        <div class="products-grid">
+            <div class="product-card animate-on-scroll">
+                <div class="product-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                        <line x1="8" y1="21" x2="16" y2="21"/>
+                        <line x1="12" y1="17" x2="12" y2="21"/>
                     </svg>
                 </div>
-                <h4>Upload File Cepat</h4>
-                <p>Upload berbagai jenis file dengan mudah dan cepat. Mendukung dokumen, gambar, video, dan berbagai format file lainnya tanpa batasan yang rumit.</p>
-            </div>
-            
-            <div class="feature-item animate-on-scroll">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
-                        <circle cx="8.5" cy="8.5" r="1.5"/>
-                        <polyline points="21,15 16,10 5,21" fill="none" stroke="currentColor" stroke-width="2"/>
-                    </svg>
+                <h3>VM 1GB</h3>
+                <ul class="product-specs">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                        RAM: 1GB
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                        CPU: 2 Core AMD EPYC 7571
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                        Region: Singapore
+                    </li>
+                </ul>
+                <div class="price">
+                    Rp 230K<span class="price-period">/bulan</span>
                 </div>
-                <h4>Analisis Gambar & Video</h4>
-                <p>AI dapat menganalisis gambar dan video yang Anda upload, memberikan deskripsi detail, menjawab pertanyaan, dan memberikan insight mendalam.</p>
-            </div>
-            
-            <div class="feature-item animate-on-scroll">
-                <div class="feature-icon">
+                <a href="https://wa.me/6285242510587?text=Halo%20Space%20Store!%20Saya%20ingin%20order%20VM%201GB%20(2%20Core%20AMD%20EPYC%207571,%20Region%20Singapore)%20-%20Rp%20230K/bulan" target="_blank" class="order-btn">
                     <svg viewBox="0 0 24 24">
-                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
                     </svg>
-                </div>
-                <h4>Bahasa Indonesia</h4>
-                <p>Dirancang khusus untuk memahami dan merespons dalam Bahasa Indonesia dengan akurat. Komunikasi natural tanpa hambatan bahasa.</p>
+                    Order Now
+                </a>
             </div>
-            
-            <div class="feature-item animate-on-scroll">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24">
-                        <polyline points="23 4 23 10 17 10" fill="none" stroke="currentColor" stroke-width="2"/>
-                        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" fill="none" stroke="currentColor" stroke-width="2"/>
-                    </svg>
-                </div>
-                <h4>Auto Retry</h4>
-                <p>Sistem otomatis mencoba ulang jika terjadi error atau gangguan. Memastikan setiap permintaan Anda diproses dengan sempurna.</p>
-            </div>
-            
-            <div class="feature-item animate-on-scroll">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="currentColor"/>
-                    </svg>
-                </div>
-                <h4>Respons Cepat</h4>
-                <p>Teknologi Gemini AI memberikan respons instan dengan kualitas tinggi. Tidak perlu menunggu lama untuk mendapat jawaban.</p>
-            </div>
-            
-            <div class="feature-item animate-on-scroll">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24">
-                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
-                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" fill="none" stroke="currentColor" stroke-width="2"/>
-                    </svg>
-                </div>
-                <h4>Multi-Format Support</h4>
-                <p>Mendukung berbagai format file termasuk PDF, Word, Excel, PowerPoint, gambar, video, audio, dan banyak lagi.</p>
-            </div>
-        </div>
-    </section>
 
-    <section class="comparison-section" id="comparison">
-        <div class="comparison-container">
-            <div class="section-header animate-on-scroll">
-                <div class="section-badge">Pilih Platform</div>
-                <h2 class="section-title">Website vs WhatsApp</h2>
-                <p class="section-description">Pilih platform yang sesuai dengan kebutuhan Anda. Kedua platform memiliki fitur lengkap dengan model AI yang berbeda.</p>
-            </div>
-            
-            <div class="comparison-grid">
-                <div class="comparison-card animate-on-scroll">
-                    <h3>🌐 Space AI Website</h3>
-                    <span class="ai-model">Gemini 2.5 Pro</span>
-                    <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 1.5rem;">Model AI paling canggih dengan kemampuan analisis mendalam dan pemahaman konteks superior untuk hasil terbaik.</p>
-                    <ul>
-                        <li>Upload file, gambar, video</li>
-                        <li>Upload cepat tanpa batasan</li>
-                        <li>Bahasa Indonesia native</li>
-                        <li>Auto retry system</li>
-                        <li>Interface web modern</li>
-                        <li>Analisis mendalam & detail</li>
-                        <li>Respons berkualitas tinggi</li>
-                    </ul>
+            <div class="product-card animate-on-scroll">
+                <div class="product-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="3" y1="9" x2="21" y2="9"/>
+                        <line x1="9" y1="21" x2="9" y2="9"/>
+                    </svg>
                 </div>
-
-                <div class="comparison-card animate-on-scroll">
-                    <h3>💬 Space AI WhatsApp</h3>
-                    <span class="ai-model">Gemini 2.5 Flash</span>
-                    <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 1.5rem;">Model AI yang dioptimalkan untuk kecepatan respons maksimal, cocok untuk kebutuhan sehari-hari yang praktis.</p>
-                    <ul>
-                        <li>Upload file, gambar, video</li>
-                        <li>Upload cepat via WhatsApp</li>
-                        <li>Bahasa Indonesia native</li>
-                        <li>Auto retry system</li>
-                        <li>Akses dari mana saja</li>
-                        <li>Respons super cepat</li>
-                        <li>Integrasi WhatsApp</li>
-                    </ul>
+                <h3>RDP 8GB</h3>
+                <ul class="product-specs">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                        RAM: 8GB
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                        CPU: 6 Core AMD EPYC 7571
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                        Region: Singapore
+                    </li>
+                </ul>
+                <div class="os-selector">
+                    <span class="os-label">OS:</span>
+                    <select id="os-rdp-8gb">
+                        <option value="Windows Server 2019">Windows Server 2019</option>
+                        <option value="Windows Server 2022">Windows Server 2022</option>
+                        <option value="Windows 10 Pro">Windows 10 Pro</option>
+                        <option value="Windows 11 Pro">Windows 11 Pro</option>
+                        <option value="Ubuntu Desktop 22.04">Ubuntu Desktop 22.04</option>
+                        <option value="Ubuntu Desktop 24.04">Ubuntu Desktop 24.04</option>
+                    </select>
                 </div>
+                <div class="price">
+                    Rp 385K<span class="price-period">/bulan</span>
+                </div>
+                <a href="#" class="order-btn" onclick="orderRDP('8GB', '6 Core', '385K', 'os-rdp-8gb'); return false;">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                    Order Now
+                </a>
             </div>
         </div>
     </section>
 
     <footer>
         <div class="footer-content">
-            <p>&copy; 2024 Space AI Indonesia. All rights reserved. Powered by Google Gemini AI</p>
+            <p>&copy; 2024 Space Store Indonesia. All rights reserved. Premium Cloud Hosting Solutions</p>
         </div>
     </footer>
 
-    <div id="accessModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2 class="modal-title">Pilih Platform</h2>
-            <p class="modal-description">Pilih platform yang Anda inginkan untuk mengakses Space AI</p>
-            <div class="modal-buttons">
-                <a href="https://ai.spacestore.dpdns.org" target="_blank" class="modal-button modal-button-primary" onclick="closeModal()">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <line x1="2" y1="12" x2="22" y2="12"></line>
-                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                    </svg>
-                    Website (Gemini 2.5 Pro)
-                </a>
-                <a href="https://wa.me/6289540291010?text=Halo%20Space%20AI!%20Saya%20ingin%20mencoba%20fitur%20AI%20assistant%20Anda." target="_blank" class="modal-button modal-button-secondary" onclick="closeModal()">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                    </svg>
-                    WhatsApp (Gemini 2.5 Flash)
-                </a>
-            </div>
-        </div>
-    </div>
-
     <script>
+        function orderRDP(ram, core, price, selectId) {
+            const osSelect = document.getElementById(selectId);
+            const selectedOS = osSelect.value;
+            const message = `Halo Space Store! Saya ingin order RDP ${ram} (${core} AMD EPYC 7571, Region Singapore) dengan OS ${selectedOS} - Rp ${price}/bulan`;
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/6285242510587?text=${encodedMessage}`, '_blank');
+        }
+
         let ticking = false;
         
         function updateNavbar() {
@@ -857,15 +775,15 @@
             const scrolled = window.scrollY > 50;
             
             if (scrolled) {
-                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.background = 'rgba(15, 15, 35, 0.98)';
                 navbar.style.backdropFilter = 'blur(30px)';
-                navbar.style.borderColor = 'rgba(255, 255, 255, 0.4)';
-                navbar.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.15)';
+                navbar.style.borderColor = 'rgba(124, 58, 237, 0.5)';
+                navbar.style.boxShadow = '0 20px 40px rgba(124, 58, 237, 0.3)';
             } else {
-                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.background = 'rgba(15, 15, 35, 0.95)';
                 navbar.style.backdropFilter = 'blur(20px)';
-                navbar.style.borderColor = 'rgba(255, 255, 255, 0.3)';
-                navbar.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.1)';
+                navbar.style.borderColor = 'rgba(124, 58, 237, 0.3)';
+                navbar.style.boxShadow = '0 8px 32px rgba(124, 58, 237, 0.2)';
             }
             ticking = false;
         }
@@ -910,30 +828,7 @@
             observer.observe(el);
         });
 
-        function openModal() {
-            document.getElementById('accessModal').style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            document.getElementById('accessModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        window.onclick = function(event) {
-            const modal = document.getElementById('accessModal');
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
-
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeModal();
-            }
-        });
-
-        document.querySelectorAll('.feature-item, .comparison-card').forEach(card => {
+        document.querySelectorAll('.product-card').forEach(card => {
             card.addEventListener('mouseenter', function() {
                 this.style.transform = 'translateY(-12px) scale(1.02)';
             });
@@ -956,11 +851,11 @@
             constructor() {
                 this.x = Math.random() * window.innerWidth;
                 this.y = window.innerHeight + 100;
-                this.size = Math.random() * 4 + 2;
-                this.speedX = (Math.random() - 0.5) * 2;
-                this.speedY = Math.random() * 3 + 2;
-                this.opacity = Math.random() * 0.6 + 0.3;
-                this.color = `rgba(59, 130, 246, ${this.opacity})`;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = (Math.random() - 0.5) * 1.5;
+                this.speedY = Math.random() * 2.5 + 1.5;
+                this.opacity = Math.random() * 0.5 + 0.2;
+                this.color = `rgba(124, 58, 237, ${this.opacity})`;
                 
                 this.element = document.createElement('div');
                 this.element.style.cssText = `
@@ -972,7 +867,7 @@
                     pointer-events: none;
                     z-index: 1;
                     opacity: ${this.opacity};
-                    box-shadow: 0 0 ${this.size * 4}px ${this.color};
+                    box-shadow: 0 0 ${this.size * 3}px ${this.color};
                     transition: all 0.3s ease;
                 `;
                 
@@ -1002,10 +897,10 @@
         }
 
         setInterval(() => {
-            if (Math.random() < 0.3) {
+            if (Math.random() < 0.25) {
                 new FloatingParticle();
             }
-        }, 3000);
+        }, 3500);
 
         const createMobileMenu = () => {
             const nav = document.querySelector('nav');
@@ -1020,7 +915,7 @@
                         background: none;
                         border: none;
                         font-size: 1.5rem;
-                        color: var(--primary-blue);
+                        color: white;
                         cursor: pointer;
                         padding: 0.5rem;
                         border-radius: 8px;
@@ -1034,12 +929,516 @@
                         navLinks.style.left = '0';
                         navLinks.style.right = '0';
                         navLinks.style.flexDirection = 'column';
-                        navLinks.style.background = 'rgba(255, 255, 255, 0.98)';
+                        navLinks.style.background = 'rgba(15, 15, 35, 0.98)';
                         navLinks.style.backdropFilter = 'blur(20px)';
                         navLinks.style.borderRadius = '0 0 20px 20px';
                         navLinks.style.padding = '1rem';
                         navLinks.style.marginTop = '0.5rem';
-                        navLinks.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.15)';
+                        navLinks.style.boxShadow = '0 10px 30px rgba(124, 58, 237, 0.3)';
+                        navLinks.style.border = '1px solid rgba(124, 58, 237, 0.3)';
+                    });
+                    
+                    nav.querySelector('.nav-container').appendChild(menuToggle);
+                }
+            }
+        };
+
+        window.addEventListener('resize', createMobileMenu);
+        createMobileMenu();
+    </script>
+</body>
+</html>
+                    </svg>
+                    Order Now
+                </a>
+            </div>
+
+            <div class="product-card animate-on-scroll">
+                <div class="product-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                        <line x1="8" y1="21" x2="16" y2="21"/>
+                        <line x1="12" y1="17" x2="12" y2="21"/>
+                    </svg>
+                </div>
+                <h3>VM 2GB</h3>
+                <ul class="product-specs">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                        RAM: 2GB
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                        CPU: 4 Core AMD EPYC 7571
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                        Region: Singapore
+                    </li>
+                </ul>
+                <div class="price">
+                    Rp 260K<span class="price-period">/bulan</span>
+                </div>
+                <a href="https://wa.me/6285242510587?text=Halo%20Space%20Store!%20Saya%20ingin%20order%20VM%202GB%20(4%20Core%20AMD%20EPYC%207571,%20Region%20Singapore)%20-%20Rp%20260K/bulan" target="_blank" class="order-btn">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                    Order Now
+                </a>
+            </div>
+
+            <div class="product-card animate-on-scroll">
+                <div class="product-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                        <line x1="8" y1="21" x2="16" y2="21"/>
+                        <line x1="12" y1="17" x2="12" y2="21"/>
+                    </svg>
+                </div>
+                <h3>VM 4GB</h3>
+                <ul class="product-specs">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                        RAM: 4GB
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                        CPU: 6 Core AMD EPYC 7571
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                        Region: Singapore
+                    </li>
+                </ul>
+                <div class="price">
+                    Rp 302K<span class="price-period">/bulan</span>
+                </div>
+                <a href="https://wa.me/6285242510587?text=Halo%20Space%20Store!%20Saya%20ingin%20order%20VM%204GB%20(6%20Core%20AMD%20EPYC%207571,%20Region%20Singapore)%20-%20Rp%20302K/bulan" target="_blank" class="order-btn">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                    Order Now
+                </a>
+            </div>
+
+            <div class="product-card animate-on-scroll">
+                <div class="product-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                        <line x1="8" y1="21" x2="16" y2="21"/>
+                        <line x1="12" y1="17" x2="12" y2="21"/>
+                    </svg>
+                </div>
+                <h3>VM 16GB</h3>
+                <ul class="product-specs">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                        RAM: 16GB
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                        CPU: 10 Core AMD EPYC 7571
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                        Region: Singapore
+                    </li>
+                </ul>
+                <div class="price">
+                    Rp 433K<span class="price-period">/bulan</span>
+                </div>
+                <a href="https://wa.me/6285242510587?text=Halo%20Space%20Store!%20Saya%20ingin%20order%20VM%2016GB%20(10%20Core%20AMD%20EPYC%207571,%20Region%20Singapore)%20-%20Rp%20433K/bulan" target="_blank" class="order-btn">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                    Order Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="rdp-section" id="rdp">
+        <div class="section-header animate-on-scroll">
+            <div class="section-badge">RDP Server</div>
+            <h2 class="section-title">RDP Premium Singapore</h2>
+            <p class="section-description">Remote Desktop Protocol dengan berbagai pilihan OS dan spesifikasi RAM hingga 8GB</p>
+        </div>
+        
+        <div class="products-grid">
+            <div class="product-card animate-on-scroll">
+                <div class="product-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="3" y1="9" x2="21" y2="9"/>
+                        <line x1="9" y1="21" x2="9" y2="9"/>
+                    </svg>
+                </div>
+                <h3>RDP 1GB</h3>
+                <ul class="product-specs">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                        RAM: 1GB
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                        CPU: 3 Core AMD EPYC 7571
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                        Region: Singapore
+                    </li>
+                </ul>
+                <div class="os-selector">
+                    <span class="os-label">OS:</span>
+                    <select id="os-rdp-1gb">
+                        <option value="Windows Server 2019">Windows Server 2019</option>
+                        <option value="Windows Server 2022">Windows Server 2022</option>
+                        <option value="Windows 10 Pro">Windows 10 Pro</option>
+                        <option value="Windows 11 Pro">Windows 11 Pro</option>
+                        <option value="Ubuntu Desktop 22.04">Ubuntu Desktop 22.04</option>
+                        <option value="Ubuntu Desktop 24.04">Ubuntu Desktop 24.04</option>
+                    </select>
+                </div>
+                <div class="price">
+                    Rp 245K<span class="price-period">/bulan</span>
+                </div>
+                <a href="#" class="order-btn" onclick="orderRDP('1GB', '3 Core', '245K', 'os-rdp-1gb'); return false;">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                    Order Now
+                </a>
+            </div>
+
+            <div class="product-card animate-on-scroll">
+                <div class="product-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="3" y1="9" x2="21" y2="9"/>
+                        <line x1="9" y1="21" x2="9" y2="9"/>
+                    </svg>
+                </div>
+                <h3>RDP 2GB</h3>
+                <ul class="product-specs">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                        RAM: 2GB
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                        CPU: 4 Core AMD EPYC 7571
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                        Region: Singapore
+                    </li>
+                </ul>
+                <div class="os-selector">
+                    <span class="os-label">OS:</span>
+                    <select id="os-rdp-2gb">
+                        <option value="Windows Server 2019">Windows Server 2019</option>
+                        <option value="Windows Server 2022">Windows Server 2022</option>
+                        <option value="Windows 10 Pro">Windows 10 Pro</option>
+                        <option value="Windows 11 Pro">Windows 11 Pro</option>
+                        <option value="Ubuntu Desktop 22.04">Ubuntu Desktop 22.04</option>
+                        <option value="Ubuntu Desktop 24.04">Ubuntu Desktop 24.04</option>
+                    </select>
+                </div>
+                <div class="price">
+                    Rp 275K<span class="price-period">/bulan</span>
+                </div>
+                <a href="#" class="order-btn" onclick="orderRDP('2GB', '4 Core', '275K', 'os-rdp-2gb'); return false;">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                    Order Now
+                </a>
+            </div>
+
+            <div class="product-card animate-on-scroll">
+                <div class="product-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="3" y1="9" x2="21" y2="9"/>
+                        <line x1="9" y1="21" x2="9" y2="9"/>
+                    </svg>
+                </div>
+                <h3>RDP 4GB</h3>
+                <ul class="product-specs">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                        RAM: 4GB
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                        CPU: 5 Core AMD EPYC 7571
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                        Region: Singapore
+                    </li>
+                </ul>
+                <div class="os-selector">
+                    <span class="os-label">OS:</span>
+                    <select id="os-rdp-4gb">
+                        <option value="Windows Server 2019">Windows Server 2019</option>
+                        <option value="Windows Server 2022">Windows Server 2022</option>
+                        <option value="Windows 10 Pro">Windows 10 Pro</option>
+                        <option value="Windows 11 Pro">Windows 11 Pro</option>
+                        <option value="Ubuntu Desktop 22.04">Ubuntu Desktop 22.04</option>
+                        <option value="Ubuntu Desktop 24.04">Ubuntu Desktop 24.04</option>
+                    </select>
+                </div>
+                <div class="price">
+                    Rp 318K<span class="price-period">/bulan</span>
+                </div>
+                <a href="#" class="order-btn" onclick="orderRDP('4GB', '5 Core', '318K', 'os-rdp-4gb'); return false;">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                    Order Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Space Store Indonesia. All rights reserved. Premium Cloud Hosting Solutions</p>
+        </div>
+    </footer>
+
+    <script>
+        function orderRDP(ram, core, price, selectId) {
+            const osSelect = document.getElementById(selectId);
+            const selectedOS = osSelect.value;
+            const message = `Halo Space Store! Saya ingin order RDP ${ram} (${core} AMD EPYC 7571, Region Singapore) dengan OS ${selectedOS} - Rp ${price}/bulan`;
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/6285242510587?text=${encodedMessage}`, '_blank');
+        }
+
+        let ticking = false;
+        
+        function updateNavbar() {
+            const navbar = document.getElementById('navbar');
+            const scrolled = window.scrollY > 50;
+            
+            if (scrolled) {
+                navbar.style.background = 'rgba(15, 15, 35, 0.98)';
+                navbar.style.backdropFilter = 'blur(30px)';
+                navbar.style.borderColor = 'rgba(124, 58, 237, 0.5)';
+                navbar.style.boxShadow = '0 20px 40px rgba(124, 58, 237, 0.3)';
+            } else {
+                navbar.style.background = 'rgba(15, 15, 35, 0.95)';
+                navbar.style.backdropFilter = 'blur(20px)';
+                navbar.style.borderColor = 'rgba(124, 58, 237, 0.3)';
+                navbar.style.boxShadow = '0 8px 32px rgba(124, 58, 237, 0.2)';
+            }
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                requestAnimationFrame(updateNavbar);
+                ticking = true;
+            }
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 100;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('animated');
+                    }, index * 150);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-12px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.8s ease';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        class FloatingParticle {
+            constructor() {
+                this.x = Math.random() * window.innerWidth;
+                this.y = window.innerHeight + 100;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = (Math.random() - 0.5) * 1.5;
+                this.speedY = Math.random() * 2.5 + 1.5;
+                this.opacity = Math.random() * 0.5 + 0.2;
+                this.color = `rgba(124, 58, 237, ${this.opacity})`;
+                
+                this.element = document.createElement('div');
+                this.element.style.cssText = `
+                    position: fixed;
+                    width: ${this.size}px;
+                    height: ${this.size}px;
+                    background: ${this.color};
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 1;
+                    opacity: ${this.opacity};
+                    box-shadow: 0 0 ${this.size * 3}px ${this.color};
+                    transition: all 0.3s ease;
+                `;
+                
+                document.body.appendChild(this.element);
+                this.animate();
+            }
+            
+            animate() {
+                const update = () => {
+                    this.y -= this.speedY;
+                    this.x += this.speedX;
+                    this.opacity *= 0.995;
+                    
+                    this.element.style.transform = `translate(${this.x}px, ${this.y}px)`;
+                    this.element.style.opacity = this.opacity;
+                    
+                    if (this.y < -100 || this.opacity < 0.01) {
+                        this.element.remove();
+                        return;
+                    }
+                    
+                    requestAnimationFrame(update);
+                };
+                
+                requestAnimationFrame(update);
+            }
+        }
+
+        setInterval(() => {
+            if (Math.random() < 0.25) {
+                new FloatingParticle();
+            }
+        }, 3500);
+
+        const createMobileMenu = () => {
+            const nav = document.querySelector('nav');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (window.innerWidth <= 768) {
+                if (!document.querySelector('.mobile-menu-toggle')) {
+                    const menuToggle = document.createElement('button');
+                    menuToggle.className = 'mobile-menu-toggle';
+                    menuToggle.innerHTML = '☰';
+                    menuToggle.style.cssText = `
+                        background: none;
+                        border: none;
+                        font-size: 1.5rem;
+                        color: white;
+                        cursor: pointer;
+                        padding: 0.5rem;
+                        border-radius: 8px;
+                        transition: all 0.3s ease;
+                    `;
+                    
+                    menuToggle.addEventListener('click', () => {
+                        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+                        navLinks.style.position = 'absolute';
+                        navLinks.style.top = '100%';
+                        navLinks.style.left = '0';
+                        navLinks.style.right = '0';
+                        navLinks.style.flexDirection = 'column';
+                        navLinks.style.background = 'rgba(15, 15, 35, 0.98)';
+                        navLinks.style.backdropFilter = 'blur(20px)';
+                        navLinks.style.borderRadius = '0 0 20px 20px';
+                        navLinks.style.padding = '1rem';
+                        navLinks.style.marginTop = '0.5rem';
+                        navLinks.style.boxShadow = '0 10px 30px rgba(124, 58, 237, 0.3)';
+                        navLinks.style.border = '1px solid rgba(124, 58, 237, 0.3)';
                     });
                     
                     nav.querySelector('.nav-container').appendChild(menuToggle);
